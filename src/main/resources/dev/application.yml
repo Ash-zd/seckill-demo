@@ -1,0 +1,21 @@
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  type-aliases-package: com.ashzd.seckill.entity
+  mapper-locations: classpath*:mybatis/mapper/*.xml
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seckill?useSSL=false&serverTimezone=UTC&characterEncoding=utf-8&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+
+debug: true
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    org.springframework.web: debug
+    com.ashzd.seckill: debug
+  path: D:/mylog/
+
