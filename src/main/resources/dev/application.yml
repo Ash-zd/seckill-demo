@@ -3,6 +3,12 @@ mybatis:
   type-aliases-package: com.ashzd.seckill.entity
   mapper-locations: classpath*:mybatis/mapper/*.xml
 
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
