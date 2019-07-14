@@ -98,6 +98,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.js"
+                )
+                .and()
+                .ignoring()
+                .antMatchers(
+                        "/swagger-ui.html",
+                        // swagger api json
+                        "/v2/api-docs",
+                        // 用来获取支持的动作
+                        "/swagger-resources/configuration/ui",
+                        // 用来获取api-docs的URI
+                        "/swagger-resources",
+                        // 安全选项
+                        "/swagger-resources/configuration/security",
+                        "/swagger-resources/**"
                 );
     }
 

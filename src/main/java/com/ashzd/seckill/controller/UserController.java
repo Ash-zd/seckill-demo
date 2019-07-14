@@ -4,6 +4,7 @@ import com.ashzd.seckill.controller.common.BaseController;
 import com.ashzd.seckill.dto.common.ResponseData;
 import com.ashzd.seckill.dto.req.UserReqDTO;
 import com.ashzd.seckill.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
 
+    @ApiOperation(value = "新增用户", notes = "新增用户")
     @RequestMapping(value = "", method = RequestMethod.POST)
     public ResponseData add(@RequestBody UserReqDTO userReqDTO) {
         userService.addUser(userReqDTO);

@@ -14,6 +14,7 @@ import java.util.Collection;
  **/
 public class AuthUser implements UserDetails {
 
+    private static final long serialVersionUID = 1558912154839643518L;
     private Integer id;
 
     private String username;

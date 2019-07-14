@@ -1,6 +1,8 @@
 package com.ashzd.seckill.controller.common;
 
-import org.springframework.web.bind.annotation.RestController;
+import com.ashzd.seckill.entity.User;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @file: BaseController
@@ -9,6 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @description:
  * @since:
  **/
-@RestController
 public class BaseController {
+
+    protected User getCurrentUser(HttpServletRequest request) {
+        return null;
+    }
+
 }
