@@ -1,6 +1,5 @@
 package com.ashzd.seckill.dto.common;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -10,12 +9,9 @@ import java.util.Objects;
  * @description:
  * @since:
  **/
-public class ResponseData implements Serializable {
+public class ResponseData extends CommonResponse {
 
     private static final long serialVersionUID = 4851115115152899314L;
-    private String message;
-
-    private String code;
 
     private Object data;
 
@@ -60,22 +56,6 @@ public class ResponseData implements Serializable {
         responseData.setCode("400");
         responseData.setData(null);
         return responseData;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 
     public Object getData() {

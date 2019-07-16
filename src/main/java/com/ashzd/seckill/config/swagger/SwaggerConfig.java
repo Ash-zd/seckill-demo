@@ -38,7 +38,7 @@ public class SwaggerConfig {
                 .title("简易秒杀系统 v1.0")
                 .description("简易秒杀系统API文档")
                 .termsOfServiceUrl("localhost:8080/")
-                .contact(new Contact("Swagger测试", "localhost:8080/swagger-ui.html", "ash_zd@qq.com"))
+                .contact(new Contact("Swagger测试文档", "localhost:8080/swagger-ui.html", "ash_zd@qq.com"))
                 .version("1.0")
                 .build();
     }

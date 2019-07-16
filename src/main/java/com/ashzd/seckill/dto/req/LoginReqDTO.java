@@ -1,5 +1,8 @@
 package com.ashzd.seckill.dto.req;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -10,12 +13,15 @@ import java.util.Objects;
  * @description:
  * @since:
  **/
+@ApiModel
 public class LoginReqDTO implements Serializable {
 
     private static final long serialVersionUID = -104713132065703362L;
 
+    @ApiModelProperty(value = "username", example = "ash")
     private String username;
 
+    @ApiModelProperty(value = "password", example = "123456")
     private String password;
 
     public String getUsername() {
