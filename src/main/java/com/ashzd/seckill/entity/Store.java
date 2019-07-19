@@ -3,32 +3,25 @@ package com.ashzd.seckill.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {
-    private Integer id;
-
-    private String username;
-
-    private String password;
-
-    private String email;
-
-    private Boolean isUser;
-
+public class Store implements Serializable {
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private Integer ownerId;
+    private String name;
+    private String description;
     private Date createdAt;
     private Date updatedAt;
 
-    public User(Integer id, String username, String password, String email, Boolean isUser, Date createdAt, Date updatedAt) {
+    public Store(Integer id, Integer ownerId, String name, String description, Date createdAt, Date updatedAt) {
         this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.isUser = isUser;
+        this.ownerId = ownerId;
+        this.name = name;
+        this.description = description;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public User() {
+    public Store() {
         super();
     }
 
@@ -40,36 +33,28 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public Integer getOwnerId() {
+        return ownerId;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
     }
 
-    public String getPassword() {
-        return password;
+    public String getName() {
+        return name;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public String getEmail() {
-        return email;
+    public String getDescription() {
+        return description;
     }
 
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    public Boolean getIsUser() {
-        return isUser;
-    }
-
-    public void setIsUser(Boolean isUser) {
-        this.isUser = isUser;
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
     }
 
     public Date getCreatedAt() {
@@ -95,10 +80,9 @@ public class User implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", username=").append(username);
-        sb.append(", password=").append(password);
-        sb.append(", email=").append(email);
-        sb.append(", isUser=").append(isUser);
+        sb.append(", ownerId=").append(ownerId);
+        sb.append(", name=").append(name);
+        sb.append(", description=").append(description);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
         sb.append(", serialVersionUID=").append(serialVersionUID);
@@ -117,12 +101,11 @@ public class User implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        User other = (User) that;
+        Store other = (Store) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-                && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-                && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
-                && (this.getIsUser() == null ? other.getIsUser() == null : this.getIsUser().equals(other.getIsUser()))
+                && (this.getOwnerId() == null ? other.getOwnerId() == null : this.getOwnerId().equals(other.getOwnerId()))
+                && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
+                && (this.getDescription() == null ? other.getDescription() == null : this.getDescription().equals(other.getDescription()))
                 && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
                 && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
     }
@@ -132,10 +115,9 @@ public class User implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
-        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
-        result = prime * result + ((getIsUser() == null) ? 0 : getIsUser().hashCode());
+        result = prime * result + ((getOwnerId() == null) ? 0 : getOwnerId().hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((getDescription() == null) ? 0 : getDescription().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
         return result;

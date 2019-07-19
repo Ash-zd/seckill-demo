@@ -1,34 +1,28 @@
 package com.ashzd.seckill.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
-public class User implements Serializable {
-    private Integer id;
-
-    private String username;
-
-    private String password;
-
-    private String email;
-
-    private Boolean isUser;
-
+public class OrderDetail implements Serializable {
     private static final long serialVersionUID = 1L;
+    private Integer id;
+    private String orderIndexCode;
+    private Integer productId;
+    private BigDecimal price;
     private Date createdAt;
     private Date updatedAt;
 
-    public User(Integer id, String username, String password, String email, Boolean isUser, Date createdAt, Date updatedAt) {
+    public OrderDetail(Integer id, String orderIndexCode, Integer productId, BigDecimal price, Date createdAt, Date updatedAt) {
         this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.isUser = isUser;
+        this.orderIndexCode = orderIndexCode;
+        this.productId = productId;
+        this.price = price;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public User() {
+    public OrderDetail() {
         super();
     }
 
@@ -40,36 +34,28 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getOrderIndexCode() {
+        return orderIndexCode;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setOrderIndexCode(String orderIndexCode) {
+        this.orderIndexCode = orderIndexCode == null ? null : orderIndexCode.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getProductId() {
+        return productId;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
-    public String getEmail() {
-        return email;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    public Boolean getIsUser() {
-        return isUser;
-    }
-
-    public void setIsUser(Boolean isUser) {
-        this.isUser = isUser;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Date getCreatedAt() {
@@ -95,10 +81,9 @@ public class User implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", username=").append(username);
-        sb.append(", password=").append(password);
-        sb.append(", email=").append(email);
-        sb.append(", isUser=").append(isUser);
+        sb.append(", orderIndexCode=").append(orderIndexCode);
+        sb.append(", productId=").append(productId);
+        sb.append(", price=").append(price);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
         sb.append(", serialVersionUID=").append(serialVersionUID);
@@ -117,12 +102,11 @@ public class User implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        User other = (User) that;
+        OrderDetail other = (OrderDetail) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-                && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-                && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
-                && (this.getIsUser() == null ? other.getIsUser() == null : this.getIsUser().equals(other.getIsUser()))
+                && (this.getOrderIndexCode() == null ? other.getOrderIndexCode() == null : this.getOrderIndexCode().equals(other.getOrderIndexCode()))
+                && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
+                && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
                 && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
                 && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
     }
@@ -132,10 +116,9 @@ public class User implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
-        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
-        result = prime * result + ((getIsUser() == null) ? 0 : getIsUser().hashCode());
+        result = prime * result + ((getOrderIndexCode() == null) ? 0 : getOrderIndexCode().hashCode());
+        result = prime * result + ((getProductId() == null) ? 0 : getProductId().hashCode());
+        result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
         return result;
