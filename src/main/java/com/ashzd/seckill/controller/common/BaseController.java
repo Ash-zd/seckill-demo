@@ -1,8 +1,15 @@
 package com.ashzd.seckill.controller.common;
 
-import com.ashzd.seckill.entity.User;
+import com.ashzd.seckill.dto.UserDTO;
+import com.ashzd.seckill.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @file: BaseController
@@ -13,8 +20,31 @@ import javax.servlet.http.HttpServletRequest;
  **/
 public class BaseController {
 
-    protected User getCurrentUser(HttpServletRequest request) {
-        return null;
+    @Autowired
+    private UserService userService;
+
+    protected SecurityContext getCurrentSecurityContext(HttpServletRequest request) {
+        return SecurityContextHolder.getContext();
+    }
+
+    protected String getCurrentUsername(HttpServletRequest request) {
+        SecurityContext securityContext = getCurrentSecurityContext(request);
+        return securityContext.getAuthentication().getName();
+    }
+
+    protected UserDetails getCurrentUserDetails(HttpServletRequest request) {
+        SecurityContext securityContext = getCurrentSecurityContext(request);
+        return (UserDetails) securityContext.getAuthentication().getDetails();
+    }
+
+    protected List<GrantedAuthority> getCurrentUserAuthorities(HttpServletRequest request) {
+        SecurityContext securityContextImpl = getCurrentSecurityContext(request);
+        return (List<GrantedAuthority>) securityContextImpl.getAuthentication().getAuthorities();
+    }
+
+    protected UserDTO getCurrentUserDTO(HttpServletRequest request) {
+        String username = getCurrentUsername(request);
+        return userService.getUserDTOByUsername(username);
     }
 
 }

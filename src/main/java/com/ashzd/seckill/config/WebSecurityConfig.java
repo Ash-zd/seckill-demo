@@ -69,6 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/actuator/**").hasRole("ADMIN")
                 .antMatchers("/user").permitAll()
+//                .antMatchers("/test/**").permitAll()
                 .antMatchers("/error").permitAll()
                 .anyRequest().authenticated();
 
@@ -97,7 +98,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/favicon.ico",
                         "/**/*.html",
                         "/**/*.css",
-                        "/**/*.js"
+                        "/**/*.js",
+                        "/**/*.woff2",
+                        "/**/*.woff"
                 )
                 .and()
                 .ignoring()
@@ -111,7 +114,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-resources",
                         // 安全选项
                         "/swagger-resources/configuration/security",
-                        "/swagger-resources/**"
+                        "/swagger-resources/**",
+                        "/webjars/springfox-swagger-ui/**"
                 );
     }
 

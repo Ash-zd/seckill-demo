@@ -5,13 +5,19 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderDetail implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Integer id;
+
     private String orderIndexCode;
+
     private Integer productId;
+
     private BigDecimal price;
+
     private Date createdAt;
+
     private Date updatedAt;
+
+    private static final long serialVersionUID = 1L;
 
     public OrderDetail(Integer id, String orderIndexCode, Integer productId, BigDecimal price, Date createdAt, Date updatedAt) {
         this.id = id;

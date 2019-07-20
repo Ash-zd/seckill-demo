@@ -1,11 +1,12 @@
 package com.ashzd.seckill.service.impl;
 
+import com.ashzd.seckill.dto.UserDTO;
 import com.ashzd.seckill.dto.req.UserReqDTO;
 import com.ashzd.seckill.entity.User;
 import com.ashzd.seckill.entity.UserExample;
 import com.ashzd.seckill.mapper.UserMapper;
 import com.ashzd.seckill.service.UserService;
-import com.ashzd.seckill.util.CollectionUtil;
+import com.ashzd.seckill.util.BCryptUtil;
 import com.ashzd.seckill.util.converter.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,8 +29,15 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User getUserById(Integer userId) {
-        return userMapper.selectByPrimaryKey(userId);
+    public UserDTO getUserById(Integer userId) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        return UserConverter.toUserDTO(user);
+    }
+
+    @Override
+    public UserDTO getUserDTOByUsername(String username) {
+        User user = this.getUserByUsername(username);
+        return UserConverter.toUserDTO(user);
     }
 
     @Override
@@ -37,7 +45,8 @@ public class UserServiceImpl implements UserService {
         UserExample example = new UserExample();
         example.createCriteria().andUsernameEqualTo(username);
         List<User> users = userMapper.selectByExample(example);
-        return CollectionUtil.isEmpty(users) ? null : users.get(0);
+        Assert.notEmpty(users, "查询用户失败");
+        return users.get(0);
     }
 
     @Override
@@ -48,10 +57,17 @@ public class UserServiceImpl implements UserService {
         Assert.notNull(userReqDTO.getUsername(), "用户名不能为null");
         Assert.notNull(userReqDTO.getPassword(), "密码不能为null");
         // 逻辑性校验
-        User user = this.getUserByUsername(userReqDTO.getUsername());
+        UserDTO user = this.getUserDTOByUsername(userReqDTO.getUsername());
         Assert.isNull(user, "用户名已存在");
         // 保存数据库
         User dbUser = UserConverter.toUser(userReqDTO);
         userMapper.insertSelective(dbUser);
+    }
+
+
+    @Override
+    public boolean authUsernameAndPassword(String username, String password) {
+        User user = this.getUserByUsername(username);
+        return BCryptUtil.match(password, user.getPassword());
     }
 }

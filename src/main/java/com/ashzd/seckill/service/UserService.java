@@ -1,5 +1,6 @@
 package com.ashzd.seckill.service;
 
+import com.ashzd.seckill.dto.UserDTO;
 import com.ashzd.seckill.dto.req.UserReqDTO;
 import com.ashzd.seckill.entity.User;
 
@@ -12,11 +13,14 @@ import com.ashzd.seckill.entity.User;
  **/
 public interface UserService {
 
+    UserDTO getUserById(Integer userId);
 
-    User getUserById(Integer userId);
+    UserDTO getUserDTOByUsername(String username);
 
     User getUserByUsername(String username);
 
     void addUser(UserReqDTO userReqDTO);
+
+    boolean authUsernameAndPassword(String username, String password);
 
 }

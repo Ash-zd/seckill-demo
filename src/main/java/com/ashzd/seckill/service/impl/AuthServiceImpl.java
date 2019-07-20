@@ -1,11 +1,8 @@
 package com.ashzd.seckill.service.impl;
 
 import com.ashzd.seckill.dto.req.LoginReqDTO;
-import com.ashzd.seckill.entity.User;
-import com.ashzd.seckill.mapper.UserMapper;
 import com.ashzd.seckill.service.AuthService;
 import com.ashzd.seckill.service.UserService;
-import com.ashzd.seckill.util.BCryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -25,8 +22,6 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private RedisTemplate redisTemplate;
-    @Autowired
-    private UserMapper userMapper;
     @Autowired
     private UserService userService;
 
@@ -54,16 +49,10 @@ public class AuthServiceImpl implements AuthService {
     public String getTokenByUsernameAndPassword(LoginReqDTO loginReqDTO) {
         String username = loginReqDTO.getUsername();
         String password = loginReqDTO.getPassword();
-        if (this.authUsernameAndPassword(username, password)) {
+        if (userService.authUsernameAndPassword(username, password)) {
             return this.getTokenByUsername(username);
         } else {
             throw new RuntimeException("auth username and password failed", new Throwable());
         }
-    }
-
-    @Override
-    public boolean authUsernameAndPassword(String username, String password) {
-        User user = userService.getUserByUsername(username);
-        return BCryptUtil.match(password, user.getPassword());
     }
 }

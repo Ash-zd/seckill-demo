@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ashzd.seckill.mapper.UserMapper">
-    <resultMap id="BaseResultMap" type="com.ashzd.seckill.entity.User">
+<mapper namespace="com.ashzd.seckill.mapper.FileMapper">
+    <resultMap id="BaseResultMap" type="com.ashzd.seckill.entity.File">
         <constructor>
             <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="is_user" javaType="java.lang.Boolean" jdbcType="BIT"/>
+            <arg column="object_id" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="filename" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="content_type" javaType="java.lang.String" jdbcType="VARCHAR"/>
             <arg column="created_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
             <arg column="updated_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </constructor>
@@ -73,15 +73,15 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, email, username, password, is_user, created_at, updated_at
+        id, object_id, user_id, filename, content_type, created_at, updated_at
     </sql>
-    <select id="selectByExample" parameterType="com.ashzd.seckill.entity.UserExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.ashzd.seckill.entity.FileExample" resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from user
+        from file
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -92,45 +92,45 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from user
+        from file
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
-        from user
+        from file
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <delete id="deleteByExample" parameterType="com.ashzd.seckill.entity.UserExample">
-        delete from user
+    <delete id="deleteByExample" parameterType="com.ashzd.seckill.entity.FileExample">
+        delete from file
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.ashzd.seckill.entity.User">
-        insert into user (id, email, username,
-                          password, is_user, created_at,
+    <insert id="insert" parameterType="com.ashzd.seckill.entity.File">
+        insert into file (id, object_id, user_id,
+                          filename, content_type, created_at,
                           updated_at)
-        values (#{id,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR},
-                #{password,jdbcType=VARCHAR}, #{isUser,jdbcType=BIT}, #{createdAt,jdbcType=TIMESTAMP},
+        values (#{id,jdbcType=INTEGER}, #{objectId,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER},
+                #{filename,jdbcType=VARCHAR}, #{contentType,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP},
                 #{updatedAt,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" parameterType="com.ashzd.seckill.entity.User">
-        insert into user
+    <insert id="insertSelective" parameterType="com.ashzd.seckill.entity.File">
+        insert into file
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
-            <if test="email != null">
-                email,
+            <if test="objectId != null">
+                object_id,
             </if>
-            <if test="username != null">
-                username,
+            <if test="userId != null">
+                user_id,
             </if>
-            <if test="password != null">
-                password,
+            <if test="filename != null">
+                filename,
             </if>
-            <if test="isUser != null">
-                is_user,
+            <if test="contentType != null">
+                content_type,
             </if>
             <if test="createdAt != null">
                 created_at,
@@ -143,17 +143,17 @@
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="email != null">
-                #{email,jdbcType=VARCHAR},
+            <if test="objectId != null">
+                #{objectId,jdbcType=VARCHAR},
             </if>
-            <if test="username != null">
-                #{username,jdbcType=VARCHAR},
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
             </if>
-            <if test="password != null">
-                #{password,jdbcType=VARCHAR},
+            <if test="filename != null">
+                #{filename,jdbcType=VARCHAR},
             </if>
-            <if test="isUser != null">
-                #{isUser,jdbcType=BIT},
+            <if test="contentType != null">
+                #{contentType,jdbcType=VARCHAR},
             </if>
             <if test="createdAt != null">
                 #{createdAt,jdbcType=TIMESTAMP},
@@ -163,29 +163,29 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.ashzd.seckill.entity.UserExample" resultType="java.lang.Long">
-        select count(*) from user
+    <select id="countByExample" parameterType="com.ashzd.seckill.entity.FileExample" resultType="java.lang.Long">
+        select count(*) from file
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
-        update user
+        update file
         <set>
             <if test="record.id != null">
                 id = #{record.id,jdbcType=INTEGER},
             </if>
-            <if test="record.email != null">
-                email = #{record.email,jdbcType=VARCHAR},
+            <if test="record.objectId != null">
+                object_id = #{record.objectId,jdbcType=VARCHAR},
             </if>
-            <if test="record.username != null">
-                username = #{record.username,jdbcType=VARCHAR},
+            <if test="record.userId != null">
+                user_id = #{record.userId,jdbcType=INTEGER},
             </if>
-            <if test="record.password != null">
-                password = #{record.password,jdbcType=VARCHAR},
+            <if test="record.filename != null">
+                filename = #{record.filename,jdbcType=VARCHAR},
             </if>
-            <if test="record.isUser != null">
-                is_user = #{record.isUser,jdbcType=BIT},
+            <if test="record.contentType != null">
+                content_type = #{record.contentType,jdbcType=VARCHAR},
             </if>
             <if test="record.createdAt != null">
                 created_at = #{record.createdAt,jdbcType=TIMESTAMP},
@@ -199,32 +199,32 @@
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
-        update user
+        update file
         set id = #{record.id,jdbcType=INTEGER},
-        email = #{record.email,jdbcType=VARCHAR},
-        username = #{record.username,jdbcType=VARCHAR},
-        password = #{record.password,jdbcType=VARCHAR},
-        is_user = #{record.isUser,jdbcType=BIT},
+        object_id = #{record.objectId,jdbcType=VARCHAR},
+        user_id = #{record.userId,jdbcType=INTEGER},
+        filename = #{record.filename,jdbcType=VARCHAR},
+        content_type = #{record.contentType,jdbcType=VARCHAR},
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
         updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ashzd.seckill.entity.User">
-        update user
+    <update id="updateByPrimaryKeySelective" parameterType="com.ashzd.seckill.entity.File">
+        update file
         <set>
-            <if test="email != null">
-                email = #{email,jdbcType=VARCHAR},
+            <if test="objectId != null">
+                object_id = #{objectId,jdbcType=VARCHAR},
             </if>
-            <if test="username != null">
-                username = #{username,jdbcType=VARCHAR},
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
             </if>
-            <if test="password != null">
-                password = #{password,jdbcType=VARCHAR},
+            <if test="filename != null">
+                filename = #{filename,jdbcType=VARCHAR},
             </if>
-            <if test="isUser != null">
-                is_user = #{isUser,jdbcType=BIT},
+            <if test="contentType != null">
+                content_type = #{contentType,jdbcType=VARCHAR},
             </if>
             <if test="createdAt != null">
                 created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -235,14 +235,14 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.ashzd.seckill.entity.User">
-        update user
-        set email      = #{email,jdbcType=VARCHAR},
-            username   = #{username,jdbcType=VARCHAR},
-            password   = #{password,jdbcType=VARCHAR},
-            is_user    = #{isUser,jdbcType=BIT},
-            created_at = #{createdAt,jdbcType=TIMESTAMP},
-            updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    <update id="updateByPrimaryKey" parameterType="com.ashzd.seckill.entity.File">
+        update file
+        set object_id    = #{objectId,jdbcType=VARCHAR},
+            user_id      = #{userId,jdbcType=INTEGER},
+            filename     = #{filename,jdbcType=VARCHAR},
+            content_type = #{contentType,jdbcType=VARCHAR},
+            created_at   = #{createdAt,jdbcType=TIMESTAMP},
+            updated_at   = #{updatedAt,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

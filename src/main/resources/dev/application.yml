@@ -10,6 +10,9 @@ pagehelper:
   params: count=countSql
 
 spring:
+  data:
+    mongodb:
+      uri: mongodb://127.0.0.1:27017/seckill
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/seckill?useSSL=false&serverTimezone=UTC&characterEncoding=utf-8&allowPublicKeyRetrieval=true

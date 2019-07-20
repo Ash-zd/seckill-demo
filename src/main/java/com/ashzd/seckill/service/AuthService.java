@@ -19,6 +19,4 @@ public interface AuthService {
 
     String getTokenByUsernameAndPassword(LoginReqDTO loginReqDTO);
 
-    boolean authUsernameAndPassword(String username, String password);
-
 }

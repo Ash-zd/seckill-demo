@@ -3,33 +3,27 @@ package com.ashzd.seckill.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class User implements Serializable {
-    private Integer id;
-
+public class File implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    private String username;
-
-    private String password;
-
-    private Boolean isUser;
-
+    private Integer id;
+    private String objectId;
+    private Integer userId;
+    private String filename;
+    private String contentType;
     private Date createdAt;
-
     private Date updatedAt;
-    private String email;
 
-    public User(Integer id, String email, String username, String password, Boolean isUser, Date createdAt, Date updatedAt) {
+    public File(Integer id, String objectId, Integer userId, String filename, String contentType, Date createdAt, Date updatedAt) {
         this.id = id;
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.isUser = isUser;
+        this.objectId = objectId;
+        this.userId = userId;
+        this.filename = filename;
+        this.contentType = contentType;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public User() {
+    public File() {
         super();
     }
 
@@ -41,36 +35,36 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getObjectId() {
+        return objectId;
     }
 
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+    public void setObjectId(String objectId) {
+        this.objectId = objectId == null ? null : objectId.trim();
     }
 
-    public String getUsername() {
-        return username;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getPassword() {
-        return password;
+    public String getFilename() {
+        return filename;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setFilename(String filename) {
+        this.filename = filename == null ? null : filename.trim();
     }
 
-    public Boolean getIsUser() {
-        return isUser;
+    public String getContentType() {
+        return contentType;
     }
 
-    public void setIsUser(Boolean isUser) {
-        this.isUser = isUser;
+    public void setContentType(String contentType) {
+        this.contentType = contentType == null ? null : contentType.trim();
     }
 
     public Date getCreatedAt() {
@@ -96,10 +90,10 @@ public class User implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", email=").append(email);
-        sb.append(", username=").append(username);
-        sb.append(", password=").append(password);
-        sb.append(", isUser=").append(isUser);
+        sb.append(", objectId=").append(objectId);
+        sb.append(", userId=").append(userId);
+        sb.append(", filename=").append(filename);
+        sb.append(", contentType=").append(contentType);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
         sb.append(", serialVersionUID=").append(serialVersionUID);
@@ -118,12 +112,12 @@ public class User implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        User other = (User) that;
+        File other = (File) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
-                && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
-                && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-                && (this.getIsUser() == null ? other.getIsUser() == null : this.getIsUser().equals(other.getIsUser()))
+                && (this.getObjectId() == null ? other.getObjectId() == null : this.getObjectId().equals(other.getObjectId()))
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+                && (this.getFilename() == null ? other.getFilename() == null : this.getFilename().equals(other.getFilename()))
+                && (this.getContentType() == null ? other.getContentType() == null : this.getContentType().equals(other.getContentType()))
                 && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
                 && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
     }
@@ -133,10 +127,10 @@ public class User implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
-        result = prime * result + ((getUsername() == null) ? 0 : getUsername().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
-        result = prime * result + ((getIsUser() == null) ? 0 : getIsUser().hashCode());
+        result = prime * result + ((getObjectId() == null) ? 0 : getObjectId().hashCode());
+        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getFilename() == null) ? 0 : getFilename().hashCode());
+        result = prime * result + ((getContentType() == null) ? 0 : getContentType().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
         return result;

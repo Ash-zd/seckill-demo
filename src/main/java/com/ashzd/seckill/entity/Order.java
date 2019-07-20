@@ -4,12 +4,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Order implements Serializable {
-    private static final long serialVersionUID = 1L;
     private String indexCode;
+
     private Integer customerId;
+
     private Integer storeId;
+
     private Date createdAt;
+
     private Date updatedAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Order(String indexCode, Integer customerId, Integer storeId, Date createdAt, Date updatedAt) {
         this.indexCode = indexCode;

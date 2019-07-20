@@ -5,15 +5,23 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Product implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Integer id;
+
     private Integer storeId;
+
     private String name;
+
     private String description;
+
     private BigDecimal price;
+
     private String tag;
+
     private Date createdAt;
+
     private Date updatedAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Product(Integer id, Integer storeId, String name, String description, BigDecimal price, String tag, Date createdAt, Date updatedAt) {
         this.id = id;

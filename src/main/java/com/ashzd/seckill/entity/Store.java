@@ -4,13 +4,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Store implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Integer id;
+
     private Integer ownerId;
+
     private String name;
+
     private String description;
+
     private Date createdAt;
+
     private Date updatedAt;
+
+    private static final long serialVersionUID = 1L;
 
     public Store(Integer id, Integer ownerId, String name, String description, Date createdAt, Date updatedAt) {
         this.id = id;
