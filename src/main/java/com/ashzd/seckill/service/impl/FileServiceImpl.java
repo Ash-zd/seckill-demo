@@ -45,7 +45,7 @@ public class FileServiceImpl implements FileService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void upload(MultipartFile file, UserDTO userDTO) throws IOException {
+    public String upload(MultipartFile file, UserDTO userDTO) throws IOException {
         // 参数校验
         Assert.notNull(file, "文件为空");
         // 获得提交的文件名
@@ -64,6 +64,7 @@ public class FileServiceImpl implements FileService {
         fileDTO.setContentType(contentType);
         File dbFile = FileConverter.toFile(fileDTO);
         fileMapper.insertSelective(dbFile);
+        return objectId.toString();
     }
 
     @Override

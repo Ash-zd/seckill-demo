@@ -66,10 +66,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(authAuthenticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/auth/**").permitAll()
+                .antMatchers("/v1/api/auth/**").permitAll()
+                .antMatchers("/v1/api/user").permitAll()
+                .antMatchers("/test/**").permitAll()
                 .antMatchers("/actuator/**").hasRole("ADMIN")
-                .antMatchers("/user").permitAll()
-//                .antMatchers("/test/**").permitAll()
                 .antMatchers("/error").permitAll()
                 .anyRequest().authenticated();
 

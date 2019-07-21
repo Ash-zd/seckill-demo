@@ -1,5 +1,6 @@
 package com.ashzd.seckill.controller;
 
+import com.ashzd.seckill.controller.common.BaseController;
 import com.ashzd.seckill.dto.common.ResponseData;
 import com.ashzd.seckill.dto.req.LoginReqDTO;
 import com.ashzd.seckill.service.AuthService;
@@ -18,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @since:
  **/
 @RestController
-@RequestMapping("/auth")
-public class AuthController {
+@RequestMapping("/v1/api/auth")
+public class AuthController extends BaseController {
 
     @Autowired
     private AuthService authService;

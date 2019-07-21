@@ -16,7 +16,7 @@ import java.io.IOException;
  **/
 public interface FileService {
 
-    void upload(MultipartFile file, UserDTO userDTO) throws IOException;
+    String upload(MultipartFile file, UserDTO userDTO) throws IOException;
 
     void delete(String fileId, UserDTO userDTO);
 
