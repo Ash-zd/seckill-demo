@@ -6,7 +6,10 @@
             <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
             <arg column="order_index_code" javaType="java.lang.String" jdbcType="VARCHAR"/>
             <arg column="product_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="price" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+            <arg column="product_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="product_description" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="product_quantity" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="product_unit_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
             <arg column="created_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
             <arg column="updated_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
         </constructor>
@@ -72,7 +75,8 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, order_index_code, product_id, price, created_at, updated_at
+        id, order_index_code, product_id, product_name, product_description, product_quantity,
+    product_unit_price, created_at, updated_at
     </sql>
     <select id="selectByExample" parameterType="com.ashzd.seckill.entity.OrderDetailExample" resultMap="BaseResultMap">
         select
@@ -107,9 +111,12 @@
     </delete>
     <insert id="insert" parameterType="com.ashzd.seckill.entity.OrderDetail">
         insert into order_detail (id, order_index_code, product_id,
-                                  price, created_at, updated_at)
+                                  product_name, product_description, product_quantity,
+                                  product_unit_price, created_at, updated_at)
         values (#{id,jdbcType=INTEGER}, #{orderIndexCode,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER},
-                #{price,jdbcType=DECIMAL}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+                #{productName,jdbcType=VARCHAR}, #{productDescription,jdbcType=VARCHAR},
+                #{productQuantity,jdbcType=INTEGER},
+                #{productUnitPrice,jdbcType=DECIMAL}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="com.ashzd.seckill.entity.OrderDetail">
         insert into order_detail
@@ -123,8 +130,17 @@
             <if test="productId != null">
                 product_id,
             </if>
-            <if test="price != null">
-                price,
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="productDescription != null">
+                product_description,
+            </if>
+            <if test="productQuantity != null">
+                product_quantity,
+            </if>
+            <if test="productUnitPrice != null">
+                product_unit_price,
             </if>
             <if test="createdAt != null">
                 created_at,
@@ -143,8 +159,17 @@
             <if test="productId != null">
                 #{productId,jdbcType=INTEGER},
             </if>
-            <if test="price != null">
-                #{price,jdbcType=DECIMAL},
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productDescription != null">
+                #{productDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="productQuantity != null">
+                #{productQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="productUnitPrice != null">
+                #{productUnitPrice,jdbcType=DECIMAL},
             </if>
             <if test="createdAt != null">
                 #{createdAt,jdbcType=TIMESTAMP},
@@ -172,8 +197,17 @@
             <if test="record.productId != null">
                 product_id = #{record.productId,jdbcType=INTEGER},
             </if>
-            <if test="record.price != null">
-                price = #{record.price,jdbcType=DECIMAL},
+            <if test="record.productName != null">
+                product_name = #{record.productName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.productDescription != null">
+                product_description = #{record.productDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="record.productQuantity != null">
+                product_quantity = #{record.productQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="record.productUnitPrice != null">
+                product_unit_price = #{record.productUnitPrice,jdbcType=DECIMAL},
             </if>
             <if test="record.createdAt != null">
                 created_at = #{record.createdAt,jdbcType=TIMESTAMP},
@@ -191,7 +225,10 @@
         set id = #{record.id,jdbcType=INTEGER},
         order_index_code = #{record.orderIndexCode,jdbcType=VARCHAR},
         product_id = #{record.productId,jdbcType=INTEGER},
-        price = #{record.price,jdbcType=DECIMAL},
+        product_name = #{record.productName,jdbcType=VARCHAR},
+        product_description = #{record.productDescription,jdbcType=VARCHAR},
+        product_quantity = #{record.productQuantity,jdbcType=INTEGER},
+        product_unit_price = #{record.productUnitPrice,jdbcType=DECIMAL},
         created_at = #{record.createdAt,jdbcType=TIMESTAMP},
         updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
         <if test="_parameter != null">
@@ -207,8 +244,17 @@
             <if test="productId != null">
                 product_id = #{productId,jdbcType=INTEGER},
             </if>
-            <if test="price != null">
-                price = #{price,jdbcType=DECIMAL},
+            <if test="productName != null">
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="productDescription != null">
+                product_description = #{productDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="productQuantity != null">
+                product_quantity = #{productQuantity,jdbcType=INTEGER},
+            </if>
+            <if test="productUnitPrice != null">
+                product_unit_price = #{productUnitPrice,jdbcType=DECIMAL},
             </if>
             <if test="createdAt != null">
                 created_at = #{createdAt,jdbcType=TIMESTAMP},
@@ -221,11 +267,14 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ashzd.seckill.entity.OrderDetail">
         update order_detail
-        set order_index_code = #{orderIndexCode,jdbcType=VARCHAR},
-            product_id       = #{productId,jdbcType=INTEGER},
-            price            = #{price,jdbcType=DECIMAL},
-            created_at       = #{createdAt,jdbcType=TIMESTAMP},
-            updated_at       = #{updatedAt,jdbcType=TIMESTAMP}
+        set order_index_code    = #{orderIndexCode,jdbcType=VARCHAR},
+            product_id          = #{productId,jdbcType=INTEGER},
+            product_name        = #{productName,jdbcType=VARCHAR},
+            product_description = #{productDescription,jdbcType=VARCHAR},
+            product_quantity    = #{productQuantity,jdbcType=INTEGER},
+            product_unit_price  = #{productUnitPrice,jdbcType=DECIMAL},
+            created_at          = #{createdAt,jdbcType=TIMESTAMP},
+            updated_at          = #{updatedAt,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

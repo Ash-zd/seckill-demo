@@ -166,6 +166,66 @@ public class ProductExample {
             return (Criteria) this;
         }
 
+        public Criteria andLastVersionIdIsNull() {
+            addCriterion("last_version_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastVersionIdIsNotNull() {
+            addCriterion("last_version_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastVersionIdEqualTo(Integer value) {
+            addCriterion("last_version_id =", value, "lastVersionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastVersionIdNotEqualTo(Integer value) {
+            addCriterion("last_version_id <>", value, "lastVersionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastVersionIdGreaterThan(Integer value) {
+            addCriterion("last_version_id >", value, "lastVersionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastVersionIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("last_version_id >=", value, "lastVersionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastVersionIdLessThan(Integer value) {
+            addCriterion("last_version_id <", value, "lastVersionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastVersionIdLessThanOrEqualTo(Integer value) {
+            addCriterion("last_version_id <=", value, "lastVersionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastVersionIdIn(List<Integer> values) {
+            addCriterion("last_version_id in", values, "lastVersionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastVersionIdNotIn(List<Integer> values) {
+            addCriterion("last_version_id not in", values, "lastVersionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastVersionIdBetween(Integer value1, Integer value2) {
+            addCriterion("last_version_id between", value1, value2, "lastVersionId");
+            return (Criteria) this;
+        }
+
+        public Criteria andLastVersionIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("last_version_id not between", value1, value2, "lastVersionId");
+            return (Criteria) this;
+        }
+
         public Criteria andStoreIdIsNull() {
             addCriterion("store_id is null");
             return (Criteria) this;
@@ -426,73 +486,63 @@ public class ProductExample {
             return (Criteria) this;
         }
 
-        public Criteria andTagIsNull() {
-            addCriterion("tag is null");
+        public Criteria andQuantityIsNull() {
+            addCriterion("quantity is null");
             return (Criteria) this;
         }
 
-        public Criteria andTagIsNotNull() {
-            addCriterion("tag is not null");
+        public Criteria andQuantityIsNotNull() {
+            addCriterion("quantity is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTagEqualTo(String value) {
-            addCriterion("tag =", value, "tag");
+        public Criteria andQuantityEqualTo(Integer value) {
+            addCriterion("quantity =", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andTagNotEqualTo(String value) {
-            addCriterion("tag <>", value, "tag");
+        public Criteria andQuantityNotEqualTo(Integer value) {
+            addCriterion("quantity <>", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andTagGreaterThan(String value) {
-            addCriterion("tag >", value, "tag");
+        public Criteria andQuantityGreaterThan(Integer value) {
+            addCriterion("quantity >", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andTagGreaterThanOrEqualTo(String value) {
-            addCriterion("tag >=", value, "tag");
+        public Criteria andQuantityGreaterThanOrEqualTo(Integer value) {
+            addCriterion("quantity >=", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andTagLessThan(String value) {
-            addCriterion("tag <", value, "tag");
+        public Criteria andQuantityLessThan(Integer value) {
+            addCriterion("quantity <", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andTagLessThanOrEqualTo(String value) {
-            addCriterion("tag <=", value, "tag");
+        public Criteria andQuantityLessThanOrEqualTo(Integer value) {
+            addCriterion("quantity <=", value, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andTagLike(String value) {
-            addCriterion("tag like", value, "tag");
+        public Criteria andQuantityIn(List<Integer> values) {
+            addCriterion("quantity in", values, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andTagNotLike(String value) {
-            addCriterion("tag not like", value, "tag");
+        public Criteria andQuantityNotIn(List<Integer> values) {
+            addCriterion("quantity not in", values, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andTagIn(List<String> values) {
-            addCriterion("tag in", values, "tag");
+        public Criteria andQuantityBetween(Integer value1, Integer value2) {
+            addCriterion("quantity between", value1, value2, "quantity");
             return (Criteria) this;
         }
 
-        public Criteria andTagNotIn(List<String> values) {
-            addCriterion("tag not in", values, "tag");
-            return (Criteria) this;
-        }
-
-        public Criteria andTagBetween(String value1, String value2) {
-            addCriterion("tag between", value1, value2, "tag");
-            return (Criteria) this;
-        }
-
-        public Criteria andTagNotBetween(String value1, String value2) {
-            addCriterion("tag not between", value1, value2, "tag");
+        public Criteria andQuantityNotBetween(Integer value1, Integer value2) {
+            addCriterion("quantity not between", value1, value2, "quantity");
             return (Criteria) this;
         }
 

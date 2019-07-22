@@ -1,6 +1,6 @@
 package com.ashzd.seckill.service;
 
-import com.ashzd.seckill.dto.req.LoginReqDTO;
+import com.ashzd.seckill.dto.req.LoginReq;
 
 /**
  * @file: AuthService
@@ -17,6 +17,6 @@ public interface AuthService {
 
     String getUsernameFromCacheByToken(String token);
 
-    String getTokenByUsernameAndPassword(LoginReqDTO loginReqDTO);
+    String getTokenByUsernameAndPassword(LoginReq loginReq);
 
 }

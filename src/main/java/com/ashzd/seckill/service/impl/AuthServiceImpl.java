@@ -1,6 +1,6 @@
 package com.ashzd.seckill.service.impl;
 
-import com.ashzd.seckill.dto.req.LoginReqDTO;
+import com.ashzd.seckill.dto.req.LoginReq;
 import com.ashzd.seckill.service.AuthService;
 import com.ashzd.seckill.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,9 +46,9 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String getTokenByUsernameAndPassword(LoginReqDTO loginReqDTO) {
-        String username = loginReqDTO.getUsername();
-        String password = loginReqDTO.getPassword();
+    public String getTokenByUsernameAndPassword(LoginReq loginReq) {
+        String username = loginReq.getUsername();
+        String password = loginReq.getPassword();
         if (userService.authUsernameAndPassword(username, password)) {
             return this.getTokenByUsername(username);
         } else {

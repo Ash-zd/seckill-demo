@@ -11,7 +11,13 @@ public class OrderDetail implements Serializable {
 
     private Integer productId;
 
-    private BigDecimal price;
+    private String productName;
+
+    private String productDescription;
+
+    private Integer productQuantity;
+
+    private BigDecimal productUnitPrice;
 
     private Date createdAt;
 
@@ -19,11 +25,14 @@ public class OrderDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public OrderDetail(Integer id, String orderIndexCode, Integer productId, BigDecimal price, Date createdAt, Date updatedAt) {
+    public OrderDetail(Integer id, String orderIndexCode, Integer productId, String productName, String productDescription, Integer productQuantity, BigDecimal productUnitPrice, Date createdAt, Date updatedAt) {
         this.id = id;
         this.orderIndexCode = orderIndexCode;
         this.productId = productId;
-        this.price = price;
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.productQuantity = productQuantity;
+        this.productUnitPrice = productUnitPrice;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -56,12 +65,36 @@ public class OrderDetail implements Serializable {
         this.productId = productId;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setProductName(String productName) {
+        this.productName = productName == null ? null : productName.trim();
+    }
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription == null ? null : productDescription.trim();
+    }
+
+    public Integer getProductQuantity() {
+        return productQuantity;
+    }
+
+    public void setProductQuantity(Integer productQuantity) {
+        this.productQuantity = productQuantity;
+    }
+
+    public BigDecimal getProductUnitPrice() {
+        return productUnitPrice;
+    }
+
+    public void setProductUnitPrice(BigDecimal productUnitPrice) {
+        this.productUnitPrice = productUnitPrice;
     }
 
     public Date getCreatedAt() {
@@ -89,7 +122,10 @@ public class OrderDetail implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", orderIndexCode=").append(orderIndexCode);
         sb.append(", productId=").append(productId);
-        sb.append(", price=").append(price);
+        sb.append(", productName=").append(productName);
+        sb.append(", productDescription=").append(productDescription);
+        sb.append(", productQuantity=").append(productQuantity);
+        sb.append(", productUnitPrice=").append(productUnitPrice);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
         sb.append(", serialVersionUID=").append(serialVersionUID);
@@ -112,7 +148,10 @@ public class OrderDetail implements Serializable {
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
                 && (this.getOrderIndexCode() == null ? other.getOrderIndexCode() == null : this.getOrderIndexCode().equals(other.getOrderIndexCode()))
                 && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
-                && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
+                && (this.getProductName() == null ? other.getProductName() == null : this.getProductName().equals(other.getProductName()))
+                && (this.getProductDescription() == null ? other.getProductDescription() == null : this.getProductDescription().equals(other.getProductDescription()))
+                && (this.getProductQuantity() == null ? other.getProductQuantity() == null : this.getProductQuantity().equals(other.getProductQuantity()))
+                && (this.getProductUnitPrice() == null ? other.getProductUnitPrice() == null : this.getProductUnitPrice().equals(other.getProductUnitPrice()))
                 && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
                 && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
     }
@@ -124,7 +163,10 @@ public class OrderDetail implements Serializable {
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getOrderIndexCode() == null) ? 0 : getOrderIndexCode().hashCode());
         result = prime * result + ((getProductId() == null) ? 0 : getProductId().hashCode());
-        result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
+        result = prime * result + ((getProductName() == null) ? 0 : getProductName().hashCode());
+        result = prime * result + ((getProductDescription() == null) ? 0 : getProductDescription().hashCode());
+        result = prime * result + ((getProductQuantity() == null) ? 0 : getProductQuantity().hashCode());
+        result = prime * result + ((getProductUnitPrice() == null) ? 0 : getProductUnitPrice().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
         return result;

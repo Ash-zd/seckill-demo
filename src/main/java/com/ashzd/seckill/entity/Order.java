@@ -1,6 +1,7 @@
 package com.ashzd.seckill.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Order implements Serializable {
@@ -10,16 +11,19 @@ public class Order implements Serializable {
 
     private Integer storeId;
 
+    private BigDecimal totalPrice;
+
     private Date createdAt;
 
     private Date updatedAt;
 
     private static final long serialVersionUID = 1L;
 
-    public Order(String indexCode, Integer customerId, Integer storeId, Date createdAt, Date updatedAt) {
+    public Order(String indexCode, Integer customerId, Integer storeId, BigDecimal totalPrice, Date createdAt, Date updatedAt) {
         this.indexCode = indexCode;
         this.customerId = customerId;
         this.storeId = storeId;
+        this.totalPrice = totalPrice;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -52,6 +56,14 @@ public class Order implements Serializable {
         this.storeId = storeId;
     }
 
+    public BigDecimal getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(BigDecimal totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     public Date getCreatedAt() {
         return createdAt;
     }
@@ -77,6 +89,7 @@ public class Order implements Serializable {
         sb.append(", indexCode=").append(indexCode);
         sb.append(", customerId=").append(customerId);
         sb.append(", storeId=").append(storeId);
+        sb.append(", totalPrice=").append(totalPrice);
         sb.append(", createdAt=").append(createdAt);
         sb.append(", updatedAt=").append(updatedAt);
         sb.append(", serialVersionUID=").append(serialVersionUID);
@@ -99,6 +112,7 @@ public class Order implements Serializable {
         return (this.getIndexCode() == null ? other.getIndexCode() == null : this.getIndexCode().equals(other.getIndexCode()))
                 && (this.getCustomerId() == null ? other.getCustomerId() == null : this.getCustomerId().equals(other.getCustomerId()))
                 && (this.getStoreId() == null ? other.getStoreId() == null : this.getStoreId().equals(other.getStoreId()))
+                && (this.getTotalPrice() == null ? other.getTotalPrice() == null : this.getTotalPrice().equals(other.getTotalPrice()))
                 && (this.getCreatedAt() == null ? other.getCreatedAt() == null : this.getCreatedAt().equals(other.getCreatedAt()))
                 && (this.getUpdatedAt() == null ? other.getUpdatedAt() == null : this.getUpdatedAt().equals(other.getUpdatedAt()));
     }
@@ -110,6 +124,7 @@ public class Order implements Serializable {
         result = prime * result + ((getIndexCode() == null) ? 0 : getIndexCode().hashCode());
         result = prime * result + ((getCustomerId() == null) ? 0 : getCustomerId().hashCode());
         result = prime * result + ((getStoreId() == null) ? 0 : getStoreId().hashCode());
+        result = prime * result + ((getTotalPrice() == null) ? 0 : getTotalPrice().hashCode());
         result = prime * result + ((getCreatedAt() == null) ? 0 : getCreatedAt().hashCode());
         result = prime * result + ((getUpdatedAt() == null) ? 0 : getUpdatedAt().hashCode());
         return result;

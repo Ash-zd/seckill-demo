@@ -2,7 +2,7 @@ package com.ashzd.seckill.controller;
 
 import com.ashzd.seckill.controller.common.BaseController;
 import com.ashzd.seckill.dto.common.ResponseData;
-import com.ashzd.seckill.dto.req.UserReqDTO;
+import com.ashzd.seckill.dto.req.UserReq;
 import com.ashzd.seckill.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,8 @@ public class UserController extends BaseController {
 
     @ApiOperation(value = "新增用户", notes = "新增用户")
     @RequestMapping(value = "", method = RequestMethod.POST)
-    public ResponseData add(@RequestBody UserReqDTO userReqDTO) {
-        userService.addUser(userReqDTO);
+    public ResponseData add(@RequestBody UserReq userReq) {
+        userService.addUser(userReq);
         return ResponseData.success();
     }
 

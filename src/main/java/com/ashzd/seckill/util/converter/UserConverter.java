@@ -1,7 +1,7 @@
 package com.ashzd.seckill.util.converter;
 
 import com.ashzd.seckill.dto.UserDTO;
-import com.ashzd.seckill.dto.req.UserReqDTO;
+import com.ashzd.seckill.dto.req.UserReq;
 import com.ashzd.seckill.entity.User;
 import com.ashzd.seckill.util.BCryptUtil;
 
@@ -14,11 +14,11 @@ import com.ashzd.seckill.util.BCryptUtil;
  **/
 public class UserConverter {
 
-    public static User toUser(UserReqDTO userReqDTO) {
+    public static User toUser(UserReq userReq) {
         User user = new User();
-        user.setUsername(userReqDTO.getUsername());
-        user.setPassword(BCryptUtil.encode(userReqDTO.getPassword()));
-        user.setEmail(userReqDTO.getEmail());
+        user.setUsername(userReq.getUsername());
+        user.setPassword(BCryptUtil.encode(userReq.getPassword()));
+        user.setEmail(userReq.getEmail());
         user.setIsUser(true);
         return user;
     }

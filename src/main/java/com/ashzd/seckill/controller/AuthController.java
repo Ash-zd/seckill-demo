@@ -2,7 +2,7 @@ package com.ashzd.seckill.controller;
 
 import com.ashzd.seckill.controller.common.BaseController;
 import com.ashzd.seckill.dto.common.ResponseData;
-import com.ashzd.seckill.dto.req.LoginReqDTO;
+import com.ashzd.seckill.dto.req.LoginReq;
 import com.ashzd.seckill.service.AuthService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,8 @@ public class AuthController extends BaseController {
 
     @ApiOperation(value = "登录", notes = "登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseData login(@RequestBody LoginReqDTO loginReqDTO) {
-        return ResponseData.success(authService.getTokenByUsernameAndPassword(loginReqDTO));
+    public ResponseData login(@RequestBody LoginReq loginReq) {
+        return ResponseData.success(authService.getTokenByUsernameAndPassword(loginReq));
     }
 
 }

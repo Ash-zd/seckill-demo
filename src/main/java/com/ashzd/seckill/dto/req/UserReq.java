@@ -1,28 +1,22 @@
 package com.ashzd.seckill.dto.req;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * @file: LoginReqDTO
+ * @file: UserReq
  * @author: Ash
- * @date: 2019/7/14 14:40
+ * @date: 2019/7/14 15:10
  * @description:
  * @since:
  **/
-@ApiModel
-public class LoginReqDTO implements Serializable {
+public class UserReq implements Serializable {
 
-    private static final long serialVersionUID = -104713132065703362L;
-
-    @ApiModelProperty(value = "username", example = "ash")
     private String username;
 
-    @ApiModelProperty(value = "password", example = "123456")
     private String password;
+
+    private String email;
 
     public String getUsername() {
         return username;
@@ -40,26 +34,36 @@ public class LoginReqDTO implements Serializable {
         this.password = password;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LoginReqDTO that = (LoginReqDTO) o;
+        UserReq that = (UserReq) o;
         return Objects.equals(username, that.username) &&
-                Objects.equals(password, that.password);
+                Objects.equals(password, that.password) &&
+                Objects.equals(email, that.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password);
+        return Objects.hash(username, password, email);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("LoginReqDTO{");
+        final StringBuilder sb = new StringBuilder("UserReq{");
         sb.append("username='").append(username).append('\'');
         sb.append(", password='").append(password).append('\'');
+        sb.append(", email='").append(email).append('\'');
         sb.append('}');
         return sb.toString();
     }

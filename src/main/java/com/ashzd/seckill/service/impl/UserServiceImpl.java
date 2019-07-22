@@ -1,7 +1,7 @@
 package com.ashzd.seckill.service.impl;
 
 import com.ashzd.seckill.dto.UserDTO;
-import com.ashzd.seckill.dto.req.UserReqDTO;
+import com.ashzd.seckill.dto.req.UserReq;
 import com.ashzd.seckill.entity.User;
 import com.ashzd.seckill.entity.UserExample;
 import com.ashzd.seckill.mapper.UserMapper;
@@ -51,16 +51,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void addUser(UserReqDTO userReqDTO) {
+    public void addUser(UserReq userReq) {
         // 参数校验
-        Assert.notNull(userReqDTO, "参数不能为null");
-        Assert.notNull(userReqDTO.getUsername(), "用户名不能为null");
-        Assert.notNull(userReqDTO.getPassword(), "密码不能为null");
+        Assert.notNull(userReq, "参数不能为null");
+        Assert.notNull(userReq.getUsername(), "用户名不能为null");
+        Assert.notNull(userReq.getPassword(), "密码不能为null");
         // 逻辑性校验
-        UserDTO user = this.getUserDTOByUsername(userReqDTO.getUsername());
+        UserDTO user = this.getUserDTOByUsername(userReq.getUsername());
         Assert.isNull(user, "用户名已存在");
         // 保存数据库
-        User dbUser = UserConverter.toUser(userReqDTO);
+        User dbUser = UserConverter.toUser(userReq);
         userMapper.insertSelective(dbUser);
     }
 

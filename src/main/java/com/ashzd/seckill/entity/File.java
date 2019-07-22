@@ -4,14 +4,21 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class File implements Serializable {
-    private static final long serialVersionUID = 1L;
     private Integer id;
+
     private String objectId;
+
     private Integer userId;
+
     private String filename;
+
     private String contentType;
+
     private Date createdAt;
+
     private Date updatedAt;
+
+    private static final long serialVersionUID = 1L;
 
     public File(Integer id, String objectId, Integer userId, String filename, String contentType, Date createdAt, Date updatedAt) {
         this.id = id;
