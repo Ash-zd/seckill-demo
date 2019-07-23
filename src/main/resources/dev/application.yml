@@ -10,6 +10,8 @@ pagehelper:
   params: count=countSql
 
 spring:
+  profiles:
+    active: @profiles.active@
   data:
     mongodb:
       uri: mongodb://127.0.0.1:27017/seckill

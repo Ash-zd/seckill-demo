@@ -1,10 +1,13 @@
 package com.ashzd.seckill.config;
 
 import com.ashzd.seckill.common.constant.AuthConstant;
+import com.ashzd.seckill.common.constant.ProfileConstant;
 import com.ashzd.seckill.config.auth.AuthAuthenticationEntryPoint;
 import com.ashzd.seckill.config.auth.AuthTokenFilter;
 import com.ashzd.seckill.config.auth.AuthUserDetailsServiceImpl;
+import com.ashzd.seckill.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -33,6 +36,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Value("${spring.profiles.active}")
+    private String activeEnvironment;
 
     @Autowired
     private AuthUserDetailsServiceImpl authUserDetailsService;
@@ -83,40 +88,42 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web
-                .ignoring()
-                .antMatchers(
-                        HttpMethod.POST,
-                        AuthConstant.AUTH_PATH
-                )
-                .and()
-                .ignoring()
-                .antMatchers(
-                        HttpMethod.GET,
-                        "/",
-                        "/*.html",
-                        "/favicon.ico",
-                        "/**/*.html",
-                        "/**/*.css",
-                        "/**/*.js",
-                        "/**/*.woff2",
-                        "/**/*.woff"
-                )
-                .and()
-                .ignoring()
-                .antMatchers(
-                        "/swagger-ui.html",
-                        // swagger api json
-                        "/v2/api-docs",
-                        // 用来获取支持的动作
-                        "/swagger-resources/configuration/ui",
-                        // 用来获取api-docs的URI
-                        "/swagger-resources",
-                        // 安全选项
-                        "/swagger-resources/configuration/security",
-                        "/swagger-resources/**",
-                        "/webjars/springfox-swagger-ui/**"
-                );
+        if (!StringUtil.equals(ProfileConstant.PRO, activeEnvironment)) {
+            web
+                    .ignoring()
+                    .antMatchers(
+                            HttpMethod.POST,
+                            AuthConstant.AUTH_PATH
+                    )
+                    .and()
+                    .ignoring()
+                    .antMatchers(
+                            HttpMethod.GET,
+                            "/",
+                            "/*.html",
+                            "/favicon.ico",
+                            "/**/*.html",
+                            "/**/*.css",
+                            "/**/*.js",
+                            "/**/*.woff2",
+                            "/**/*.woff"
+                    )
+                    .and()
+                    .ignoring()
+                    .antMatchers(
+                            "/swagger-ui.html",
+                            // swagger api json
+                            "/v2/api-docs",
+                            // 用来获取支持的动作
+                            "/swagger-resources/configuration/ui",
+                            // 用来获取api-docs的URI
+                            "/swagger-resources",
+                            // 安全选项
+                            "/swagger-resources/configuration/security",
+                            "/swagger-resources/**",
+                            "/webjars/springfox-swagger-ui/**"
+                    );
+        }
     }
 
 
