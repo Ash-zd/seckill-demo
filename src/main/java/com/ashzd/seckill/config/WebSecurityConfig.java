@@ -88,27 +88,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
+        web
+                .ignoring()
+                .antMatchers(
+                        HttpMethod.POST,
+                        AuthConstant.AUTH_PATH
+                )
+                .and()
+                .ignoring()
+                .antMatchers(
+                        HttpMethod.GET,
+                        "/",
+                        "/*.html",
+                        "/favicon.ico",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js",
+                        "/**/*.woff2",
+                        "/**/*.woff"
+                );
         if (!StringUtil.equals(ProfileConstant.PRO, activeEnvironment)) {
             web
-                    .ignoring()
-                    .antMatchers(
-                            HttpMethod.POST,
-                            AuthConstant.AUTH_PATH
-                    )
-                    .and()
-                    .ignoring()
-                    .antMatchers(
-                            HttpMethod.GET,
-                            "/",
-                            "/*.html",
-                            "/favicon.ico",
-                            "/**/*.html",
-                            "/**/*.css",
-                            "/**/*.js",
-                            "/**/*.woff2",
-                            "/**/*.woff"
-                    )
-                    .and()
                     .ignoring()
                     .antMatchers(
                             "/swagger-ui.html",
