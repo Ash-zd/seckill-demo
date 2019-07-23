@@ -11,14 +11,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  **/
 public class BCryptUtil {
 
+    private static BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
     public static String encode(String password) {
-        final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder.encode(password);
     }
 
     public static boolean match(String password, String encodedPassword) {
-        final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder.matches(password, encodedPassword);
     }
 
