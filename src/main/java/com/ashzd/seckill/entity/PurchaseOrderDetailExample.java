@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class OrderDetailExample {
+public class PurchaseOrderDetailExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public OrderDetailExample() {
+    public PurchaseOrderDetailExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -166,73 +166,73 @@ public class OrderDetailExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderIndexCodeIsNull() {
-            addCriterion("order_index_code is null");
+        public Criteria andPurchaseOrderIndexCodeIsNull() {
+            addCriterion("purchase_order_index_code is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIndexCodeIsNotNull() {
-            addCriterion("order_index_code is not null");
+        public Criteria andPurchaseOrderIndexCodeIsNotNull() {
+            addCriterion("purchase_order_index_code is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIndexCodeEqualTo(String value) {
-            addCriterion("order_index_code =", value, "orderIndexCode");
+        public Criteria andPurchaseOrderIndexCodeEqualTo(String value) {
+            addCriterion("purchase_order_index_code =", value, "purchaseOrderIndexCode");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIndexCodeNotEqualTo(String value) {
-            addCriterion("order_index_code <>", value, "orderIndexCode");
+        public Criteria andPurchaseOrderIndexCodeNotEqualTo(String value) {
+            addCriterion("purchase_order_index_code <>", value, "purchaseOrderIndexCode");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIndexCodeGreaterThan(String value) {
-            addCriterion("order_index_code >", value, "orderIndexCode");
+        public Criteria andPurchaseOrderIndexCodeGreaterThan(String value) {
+            addCriterion("purchase_order_index_code >", value, "purchaseOrderIndexCode");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIndexCodeGreaterThanOrEqualTo(String value) {
-            addCriterion("order_index_code >=", value, "orderIndexCode");
+        public Criteria andPurchaseOrderIndexCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("purchase_order_index_code >=", value, "purchaseOrderIndexCode");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIndexCodeLessThan(String value) {
-            addCriterion("order_index_code <", value, "orderIndexCode");
+        public Criteria andPurchaseOrderIndexCodeLessThan(String value) {
+            addCriterion("purchase_order_index_code <", value, "purchaseOrderIndexCode");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIndexCodeLessThanOrEqualTo(String value) {
-            addCriterion("order_index_code <=", value, "orderIndexCode");
+        public Criteria andPurchaseOrderIndexCodeLessThanOrEqualTo(String value) {
+            addCriterion("purchase_order_index_code <=", value, "purchaseOrderIndexCode");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIndexCodeLike(String value) {
-            addCriterion("order_index_code like", value, "orderIndexCode");
+        public Criteria andPurchaseOrderIndexCodeLike(String value) {
+            addCriterion("purchase_order_index_code like", value, "purchaseOrderIndexCode");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIndexCodeNotLike(String value) {
-            addCriterion("order_index_code not like", value, "orderIndexCode");
+        public Criteria andPurchaseOrderIndexCodeNotLike(String value) {
+            addCriterion("purchase_order_index_code not like", value, "purchaseOrderIndexCode");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIndexCodeIn(List<String> values) {
-            addCriterion("order_index_code in", values, "orderIndexCode");
+        public Criteria andPurchaseOrderIndexCodeIn(List<String> values) {
+            addCriterion("purchase_order_index_code in", values, "purchaseOrderIndexCode");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIndexCodeNotIn(List<String> values) {
-            addCriterion("order_index_code not in", values, "orderIndexCode");
+        public Criteria andPurchaseOrderIndexCodeNotIn(List<String> values) {
+            addCriterion("purchase_order_index_code not in", values, "purchaseOrderIndexCode");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIndexCodeBetween(String value1, String value2) {
-            addCriterion("order_index_code between", value1, value2, "orderIndexCode");
+        public Criteria andPurchaseOrderIndexCodeBetween(String value1, String value2) {
+            addCriterion("purchase_order_index_code between", value1, value2, "purchaseOrderIndexCode");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIndexCodeNotBetween(String value1, String value2) {
-            addCriterion("order_index_code not between", value1, value2, "orderIndexCode");
+        public Criteria andPurchaseOrderIndexCodeNotBetween(String value1, String value2) {
+            addCriterion("purchase_order_index_code not between", value1, value2, "purchaseOrderIndexCode");
             return (Criteria) this;
         }
 

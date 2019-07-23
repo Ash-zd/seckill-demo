@@ -14,6 +14,8 @@ public interface ProductService {
 
     void add(ProductReq productReq, UserDTO userDTO);
 
-    void decrease(Integer productId);
+    void decrease(Integer productId, Integer quantity);
+
+    boolean isStoreOwnProduct(Integer storeId, Integer productId);
 
 }

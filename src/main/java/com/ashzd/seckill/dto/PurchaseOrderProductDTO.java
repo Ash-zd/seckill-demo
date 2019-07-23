@@ -1,15 +1,15 @@
-package com.ashzd.seckill.dto.req;
+package com.ashzd.seckill.dto;
 
 import java.util.Objects;
 
 /**
- * @file: OrderProductDTO
+ * @file: PurchaseOrderProductDTO
  * @author: Ash
  * @date: 2019/7/22 21:10
  * @description:
  * @since:
  **/
-public class OrderProductDTO {
+public class PurchaseOrderProductDTO {
 
     private String name;
 
@@ -35,7 +35,7 @@ public class OrderProductDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderProductDTO that = (OrderProductDTO) o;
+        PurchaseOrderProductDTO that = (PurchaseOrderProductDTO) o;
         return Objects.equals(name, that.name) &&
                 Objects.equals(description, that.description);
     }
@@ -47,7 +47,7 @@ public class OrderProductDTO {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("OrderProductDTO{");
+        final StringBuilder sb = new StringBuilder("PurchaseOrderProductDTO{");
         sb.append("name='").append(name).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append('}');

@@ -12,6 +12,7 @@ import java.util.Objects;
  **/
 public class StoreDTO implements Serializable {
 
+    private static final long serialVersionUID = -7921993730167579029L;
     private Integer id;
     private String name;
     private String description;

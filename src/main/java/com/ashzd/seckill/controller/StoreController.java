@@ -2,11 +2,12 @@ package com.ashzd.seckill.controller;
 
 import com.ashzd.seckill.controller.common.BaseController;
 import com.ashzd.seckill.dto.common.ResponseData;
-import com.ashzd.seckill.dto.page.StorePageReq;
 import com.ashzd.seckill.dto.req.StoreReq;
+import com.ashzd.seckill.dto.req.page.StorePageReq;
 import com.ashzd.seckill.service.StoreService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +29,7 @@ public class StoreController extends BaseController {
     private StoreService storeService;
 
     @ApiOperation(value = "新增店铺")
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ResponseData add(StoreReq storeReq, HttpServletRequest request) {
         storeService.add(storeReq, getCurrentUserDTO(request));
@@ -35,6 +37,7 @@ public class StoreController extends BaseController {
     }
 
     @ApiOperation(value = "修改店铺")
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public ResponseData update(StoreReq storeReq, HttpServletRequest request) {
         storeService.update(storeReq, getCurrentUserDTO(request));
@@ -42,10 +45,10 @@ public class StoreController extends BaseController {
     }
 
     @ApiOperation(value = "查询店铺")
+    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseData query(StorePageReq storePageReq) {
-        storeService.query(storePageReq);
-        return ResponseData.success();
+        return ResponseData.success(storeService.query(storePageReq));
     }
 
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Order implements Serializable {
+public class PurchaseOrder implements Serializable {
     private String indexCode;
 
     private Integer customerId;
@@ -19,7 +19,7 @@ public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Order(String indexCode, Integer customerId, Integer storeId, BigDecimal totalPrice, Date createdAt, Date updatedAt) {
+    public PurchaseOrder(String indexCode, Integer customerId, Integer storeId, BigDecimal totalPrice, Date createdAt, Date updatedAt) {
         this.indexCode = indexCode;
         this.customerId = customerId;
         this.storeId = storeId;
@@ -28,7 +28,7 @@ public class Order implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public Order() {
+    public PurchaseOrder() {
         super();
     }
 
@@ -108,7 +108,7 @@ public class Order implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Order other = (Order) that;
+        PurchaseOrder other = (PurchaseOrder) that;
         return (this.getIndexCode() == null ? other.getIndexCode() == null : this.getIndexCode().equals(other.getIndexCode()))
                 && (this.getCustomerId() == null ? other.getCustomerId() == null : this.getCustomerId().equals(other.getCustomerId()))
                 && (this.getStoreId() == null ? other.getStoreId() == null : this.getStoreId().equals(other.getStoreId()))

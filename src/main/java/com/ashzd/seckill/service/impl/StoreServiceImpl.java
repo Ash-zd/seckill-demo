@@ -2,8 +2,8 @@ package com.ashzd.seckill.service.impl;
 
 import com.ashzd.seckill.dto.StoreDTO;
 import com.ashzd.seckill.dto.UserDTO;
-import com.ashzd.seckill.dto.page.StorePageReq;
 import com.ashzd.seckill.dto.req.StoreReq;
+import com.ashzd.seckill.dto.req.page.StorePageReq;
 import com.ashzd.seckill.entity.Store;
 import com.ashzd.seckill.entity.StoreExample;
 import com.ashzd.seckill.mapper.StoreMapper;
@@ -14,6 +14,7 @@ import com.ashzd.seckill.util.converter.StoreConverter;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.Date;
@@ -35,18 +36,19 @@ public class StoreServiceImpl implements StoreService {
     private StoreMapper storeMapper;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void add(StoreReq storeReq, UserDTO userDTO) {
         // 参数校验
         Assert.notNull(storeReq, "店铺信息为空");
         Assert.isTrue(StringUtil.isNotBlank(storeReq.getName()), "店铺名称为空");
         Assert.isTrue(StringUtil.isNotBlank(storeReq.getDescription()), "店铺描述为空");
         // 逻辑校验
-        Assert.isTrue(this.isStoreNameAndOwnerDuplicate(storeReq.getName(), userDTO.getUserId()), "该用户已存在同名店铺");
-        Store store = StoreConverter.toStore(storeReq);
+        Assert.isTrue(!this.isUserOwnSameNameStore(storeReq.getName(), userDTO.getUserId()), "该用户已存在同名店铺");
+        Store store = StoreConverter.toStore(storeReq, userDTO.getUserId());
         storeMapper.insertSelective(store);
     }
 
-    private boolean isStoreNameAndOwnerDuplicate(String name, Integer ownerId) {
+    private boolean isUserOwnSameNameStore(String name, Integer ownerId) {
         StoreExample example = new StoreExample();
         example.createCriteria().andOwnerIdEqualTo(ownerId).andNameEqualTo(name);
         List<Store> stores = storeMapper.selectByExample(example);
@@ -54,13 +56,14 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void update(StoreReq storeReq, UserDTO userDTO) {
         // 参数校验
         Assert.notNull(storeReq, "店铺信息为空");
         Assert.notNull(storeReq.getId(), "店铺编号为空");
         Store store = storeMapper.selectByPrimaryKey(storeReq.getId());
         if (StringUtil.isNotBlank(storeReq.getName())) {
-            Assert.isTrue(this.isStoreNameAndOwnerDuplicate(storeReq.getName(), userDTO.getUserId()), "该用户已存在同名店铺");
+            Assert.isTrue(!this.isUserOwnSameNameStore(storeReq.getName(), userDTO.getUserId()), "该用户已存在同名店铺");
             store.setName(storeReq.getName());
         }
         if (StringUtil.isNotBlank(storeReq.getDescription())) {
@@ -71,6 +74,7 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delete(StoreReq storeReq, UserDTO userDTO) {
         // 参数校验
         Assert.notNull(storeReq, "店铺信息为空");

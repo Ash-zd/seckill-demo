@@ -1,4 +1,4 @@
-package com.ashzd.seckill.dto.page;
+package com.ashzd.seckill.dto.req.page;
 
 import java.util.Objects;
 

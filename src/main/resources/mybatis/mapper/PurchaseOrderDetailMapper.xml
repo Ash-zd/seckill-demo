@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ashzd.seckill.mapper.OrderDetailMapper">
-    <resultMap id="BaseResultMap" type="com.ashzd.seckill.entity.OrderDetail">
+<mapper namespace="com.ashzd.seckill.mapper.PurchaseOrderDetailMapper">
+    <resultMap id="BaseResultMap" type="com.ashzd.seckill.entity.PurchaseOrderDetail">
         <constructor>
             <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="order_index_code" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="purchase_order_index_code" javaType="java.lang.String" jdbcType="VARCHAR"/>
             <arg column="product_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
             <arg column="product_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
             <arg column="product_description" javaType="java.lang.String" jdbcType="VARCHAR"/>
@@ -75,16 +75,17 @@
         </where>
     </sql>
     <sql id="Base_Column_List">
-        id, order_index_code, product_id, product_name, product_description, product_quantity,
+        id, purchase_order_index_code, product_id, product_name, product_description, product_quantity,
     product_unit_price, created_at, updated_at
     </sql>
-    <select id="selectByExample" parameterType="com.ashzd.seckill.entity.OrderDetailExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.ashzd.seckill.entity.PurchaseOrderDetailExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from order_detail
+        from purchase_order_detail
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -95,37 +96,37 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from order_detail
+        from purchase_order_detail
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
         delete
-        from order_detail
+        from purchase_order_detail
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <delete id="deleteByExample" parameterType="com.ashzd.seckill.entity.OrderDetailExample">
-        delete from order_detail
+    <delete id="deleteByExample" parameterType="com.ashzd.seckill.entity.PurchaseOrderDetailExample">
+        delete from purchase_order_detail
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.ashzd.seckill.entity.OrderDetail">
-        insert into order_detail (id, order_index_code, product_id,
-                                  product_name, product_description, product_quantity,
-                                  product_unit_price, created_at, updated_at)
-        values (#{id,jdbcType=INTEGER}, #{orderIndexCode,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER},
+    <insert id="insert" parameterType="com.ashzd.seckill.entity.PurchaseOrderDetail">
+        insert into purchase_order_detail (id, purchase_order_index_code, product_id,
+                                           product_name, product_description, product_quantity,
+                                           product_unit_price, created_at, updated_at)
+        values (#{id,jdbcType=INTEGER}, #{purchaseOrderIndexCode,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER},
                 #{productName,jdbcType=VARCHAR}, #{productDescription,jdbcType=VARCHAR},
                 #{productQuantity,jdbcType=INTEGER},
                 #{productUnitPrice,jdbcType=DECIMAL}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" parameterType="com.ashzd.seckill.entity.OrderDetail">
-        insert into order_detail
+    <insert id="insertSelective" parameterType="com.ashzd.seckill.entity.PurchaseOrderDetail">
+        insert into purchase_order_detail
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
             </if>
-            <if test="orderIndexCode != null">
-                order_index_code,
+            <if test="purchaseOrderIndexCode != null">
+                purchase_order_index_code,
             </if>
             <if test="productId != null">
                 product_id,
@@ -153,8 +154,8 @@
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="orderIndexCode != null">
-                #{orderIndexCode,jdbcType=VARCHAR},
+            <if test="purchaseOrderIndexCode != null">
+                #{purchaseOrderIndexCode,jdbcType=VARCHAR},
             </if>
             <if test="productId != null">
                 #{productId,jdbcType=INTEGER},
@@ -179,20 +180,21 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.ashzd.seckill.entity.OrderDetailExample" resultType="java.lang.Long">
-        select count(*) from order_detail
+    <select id="countByExample" parameterType="com.ashzd.seckill.entity.PurchaseOrderDetailExample"
+            resultType="java.lang.Long">
+        select count(*) from purchase_order_detail
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
-        update order_detail
+        update purchase_order_detail
         <set>
             <if test="record.id != null">
                 id = #{record.id,jdbcType=INTEGER},
             </if>
-            <if test="record.orderIndexCode != null">
-                order_index_code = #{record.orderIndexCode,jdbcType=VARCHAR},
+            <if test="record.purchaseOrderIndexCode != null">
+                purchase_order_index_code = #{record.purchaseOrderIndexCode,jdbcType=VARCHAR},
             </if>
             <if test="record.productId != null">
                 product_id = #{record.productId,jdbcType=INTEGER},
@@ -221,9 +223,9 @@
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
-        update order_detail
+        update purchase_order_detail
         set id = #{record.id,jdbcType=INTEGER},
-        order_index_code = #{record.orderIndexCode,jdbcType=VARCHAR},
+        purchase_order_index_code = #{record.purchaseOrderIndexCode,jdbcType=VARCHAR},
         product_id = #{record.productId,jdbcType=INTEGER},
         product_name = #{record.productName,jdbcType=VARCHAR},
         product_description = #{record.productDescription,jdbcType=VARCHAR},
@@ -235,11 +237,11 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ashzd.seckill.entity.OrderDetail">
-        update order_detail
+    <update id="updateByPrimaryKeySelective" parameterType="com.ashzd.seckill.entity.PurchaseOrderDetail">
+        update purchase_order_detail
         <set>
-            <if test="orderIndexCode != null">
-                order_index_code = #{orderIndexCode,jdbcType=VARCHAR},
+            <if test="purchaseOrderIndexCode != null">
+                purchase_order_index_code = #{purchaseOrderIndexCode,jdbcType=VARCHAR},
             </if>
             <if test="productId != null">
                 product_id = #{productId,jdbcType=INTEGER},
@@ -265,16 +267,16 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.ashzd.seckill.entity.OrderDetail">
-        update order_detail
-        set order_index_code    = #{orderIndexCode,jdbcType=VARCHAR},
-            product_id          = #{productId,jdbcType=INTEGER},
-            product_name        = #{productName,jdbcType=VARCHAR},
-            product_description = #{productDescription,jdbcType=VARCHAR},
-            product_quantity    = #{productQuantity,jdbcType=INTEGER},
-            product_unit_price  = #{productUnitPrice,jdbcType=DECIMAL},
-            created_at          = #{createdAt,jdbcType=TIMESTAMP},
-            updated_at          = #{updatedAt,jdbcType=TIMESTAMP}
+    <update id="updateByPrimaryKey" parameterType="com.ashzd.seckill.entity.PurchaseOrderDetail">
+        update purchase_order_detail
+        set purchase_order_index_code = #{purchaseOrderIndexCode,jdbcType=VARCHAR},
+            product_id                = #{productId,jdbcType=INTEGER},
+            product_name              = #{productName,jdbcType=VARCHAR},
+            product_description       = #{productDescription,jdbcType=VARCHAR},
+            product_quantity          = #{productQuantity,jdbcType=INTEGER},
+            product_unit_price        = #{productUnitPrice,jdbcType=DECIMAL},
+            created_at                = #{createdAt,jdbcType=TIMESTAMP},
+            updated_at                = #{updatedAt,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

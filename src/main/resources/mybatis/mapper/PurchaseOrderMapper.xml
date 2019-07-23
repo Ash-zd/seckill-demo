@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ashzd.seckill.mapper.OrderMapper">
-    <resultMap id="BaseResultMap" type="com.ashzd.seckill.entity.Order">
+<mapper namespace="com.ashzd.seckill.mapper.PurchaseOrderMapper">
+    <resultMap id="BaseResultMap" type="com.ashzd.seckill.entity.PurchaseOrder">
         <constructor>
             <idArg column="index_code" javaType="java.lang.String" jdbcType="VARCHAR"/>
             <arg column="customer_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
@@ -74,13 +74,14 @@
     <sql id="Base_Column_List">
         index_code, customer_id, store_id, total_price, created_at, updated_at
     </sql>
-    <select id="selectByExample" parameterType="com.ashzd.seckill.entity.OrderExample" resultMap="BaseResultMap">
+    <select id="selectByExample" parameterType="com.ashzd.seckill.entity.PurchaseOrderExample"
+            resultMap="BaseResultMap">
         select
         <if test="distinct">
             distinct
         </if>
         <include refid="Base_Column_List"/>
-        from order
+        from purchase_order
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
@@ -91,28 +92,28 @@
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from order
+        from purchase_order
         where index_code = #{indexCode,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete
-        from order
+        from purchase_order
         where index_code = #{indexCode,jdbcType=VARCHAR}
     </delete>
-    <delete id="deleteByExample" parameterType="com.ashzd.seckill.entity.OrderExample">
-        delete from order
+    <delete id="deleteByExample" parameterType="com.ashzd.seckill.entity.PurchaseOrderExample">
+        delete from purchase_order
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </delete>
-    <insert id="insert" parameterType="com.ashzd.seckill.entity.Order">
-        insert into order (index_code, customer_id, store_id,
-                           total_price, created_at, updated_at)
+    <insert id="insert" parameterType="com.ashzd.seckill.entity.PurchaseOrder">
+        insert into purchase_order (index_code, customer_id, store_id,
+                                    total_price, created_at, updated_at)
         values (#{indexCode,jdbcType=VARCHAR}, #{customerId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER},
                 #{totalPrice,jdbcType=DECIMAL}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" parameterType="com.ashzd.seckill.entity.Order">
-        insert into order
+    <insert id="insertSelective" parameterType="com.ashzd.seckill.entity.PurchaseOrder">
+        insert into purchase_order
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="indexCode != null">
                 index_code,
@@ -154,14 +155,15 @@
             </if>
         </trim>
     </insert>
-    <select id="countByExample" parameterType="com.ashzd.seckill.entity.OrderExample" resultType="java.lang.Long">
-        select count(*) from order
+    <select id="countByExample" parameterType="com.ashzd.seckill.entity.PurchaseOrderExample"
+            resultType="java.lang.Long">
+        select count(*) from purchase_order
         <if test="_parameter != null">
             <include refid="Example_Where_Clause"/>
         </if>
     </select>
     <update id="updateByExampleSelective" parameterType="map">
-        update order
+        update purchase_order
         <set>
             <if test="record.indexCode != null">
                 index_code = #{record.indexCode,jdbcType=VARCHAR},
@@ -187,7 +189,7 @@
         </if>
     </update>
     <update id="updateByExample" parameterType="map">
-        update order
+        update purchase_order
         set index_code = #{record.indexCode,jdbcType=VARCHAR},
         customer_id = #{record.customerId,jdbcType=INTEGER},
         store_id = #{record.storeId,jdbcType=INTEGER},
@@ -198,8 +200,8 @@
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
     </update>
-    <update id="updateByPrimaryKeySelective" parameterType="com.ashzd.seckill.entity.Order">
-        update order
+    <update id="updateByPrimaryKeySelective" parameterType="com.ashzd.seckill.entity.PurchaseOrder">
+        update purchase_order
         <set>
             <if test="customerId != null">
                 customer_id = #{customerId,jdbcType=INTEGER},
@@ -219,8 +221,8 @@
         </set>
         where index_code = #{indexCode,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.ashzd.seckill.entity.Order">
-        update order
+    <update id="updateByPrimaryKey" parameterType="com.ashzd.seckill.entity.PurchaseOrder">
+        update purchase_order
         set customer_id = #{customerId,jdbcType=INTEGER},
             store_id    = #{storeId,jdbcType=INTEGER},
             total_price = #{totalPrice,jdbcType=DECIMAL},

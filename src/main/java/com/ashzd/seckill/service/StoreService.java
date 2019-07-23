@@ -2,8 +2,8 @@ package com.ashzd.seckill.service;
 
 import com.ashzd.seckill.dto.StoreDTO;
 import com.ashzd.seckill.dto.UserDTO;
-import com.ashzd.seckill.dto.page.StorePageReq;
 import com.ashzd.seckill.dto.req.StoreReq;
+import com.ashzd.seckill.dto.req.page.StorePageReq;
 
 import java.util.List;
 

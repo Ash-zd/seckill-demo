@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class OrderDetail implements Serializable {
+public class PurchaseOrderDetail implements Serializable {
     private Integer id;
 
-    private String orderIndexCode;
+    private String purchaseOrderIndexCode;
 
     private Integer productId;
 
@@ -25,9 +25,9 @@ public class OrderDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public OrderDetail(Integer id, String orderIndexCode, Integer productId, String productName, String productDescription, Integer productQuantity, BigDecimal productUnitPrice, Date createdAt, Date updatedAt) {
+    public PurchaseOrderDetail(Integer id, String purchaseOrderIndexCode, Integer productId, String productName, String productDescription, Integer productQuantity, BigDecimal productUnitPrice, Date createdAt, Date updatedAt) {
         this.id = id;
-        this.orderIndexCode = orderIndexCode;
+        this.purchaseOrderIndexCode = purchaseOrderIndexCode;
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -37,7 +37,7 @@ public class OrderDetail implements Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public OrderDetail() {
+    public PurchaseOrderDetail() {
         super();
     }
 
@@ -49,12 +49,12 @@ public class OrderDetail implements Serializable {
         this.id = id;
     }
 
-    public String getOrderIndexCode() {
-        return orderIndexCode;
+    public String getPurchaseOrderIndexCode() {
+        return purchaseOrderIndexCode;
     }
 
-    public void setOrderIndexCode(String orderIndexCode) {
-        this.orderIndexCode = orderIndexCode == null ? null : orderIndexCode.trim();
+    public void setPurchaseOrderIndexCode(String purchaseOrderIndexCode) {
+        this.purchaseOrderIndexCode = purchaseOrderIndexCode == null ? null : purchaseOrderIndexCode.trim();
     }
 
     public Integer getProductId() {
@@ -120,7 +120,7 @@ public class OrderDetail implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", orderIndexCode=").append(orderIndexCode);
+        sb.append(", purchaseOrderIndexCode=").append(purchaseOrderIndexCode);
         sb.append(", productId=").append(productId);
         sb.append(", productName=").append(productName);
         sb.append(", productDescription=").append(productDescription);
@@ -144,9 +144,9 @@ public class OrderDetail implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        OrderDetail other = (OrderDetail) that;
+        PurchaseOrderDetail other = (PurchaseOrderDetail) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getOrderIndexCode() == null ? other.getOrderIndexCode() == null : this.getOrderIndexCode().equals(other.getOrderIndexCode()))
+                && (this.getPurchaseOrderIndexCode() == null ? other.getPurchaseOrderIndexCode() == null : this.getPurchaseOrderIndexCode().equals(other.getPurchaseOrderIndexCode()))
                 && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
                 && (this.getProductName() == null ? other.getProductName() == null : this.getProductName().equals(other.getProductName()))
                 && (this.getProductDescription() == null ? other.getProductDescription() == null : this.getProductDescription().equals(other.getProductDescription()))
@@ -161,7 +161,7 @@ public class OrderDetail implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getOrderIndexCode() == null) ? 0 : getOrderIndexCode().hashCode());
+        result = prime * result + ((getPurchaseOrderIndexCode() == null) ? 0 : getPurchaseOrderIndexCode().hashCode());
         result = prime * result + ((getProductId() == null) ? 0 : getProductId().hashCode());
         result = prime * result + ((getProductName() == null) ? 0 : getProductName().hashCode());
         result = prime * result + ((getProductDescription() == null) ? 0 : getProductDescription().hashCode());

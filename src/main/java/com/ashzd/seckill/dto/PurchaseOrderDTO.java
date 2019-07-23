@@ -1,24 +1,22 @@
 package com.ashzd.seckill.dto;
 
-import com.ashzd.seckill.dto.req.OrderProductDTO;
-
 import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
- * @file: OrderDTO
+ * @file: PurchaseOrderDTO
  * @author: Ash
  * @date: 2019/7/22 20:59
  * @description:
  * @since:
  **/
-public class OrderDTO {
+public class PurchaseOrderDTO {
 
     private Integer id;
 
     private String orderIndexCode;
 
-    private OrderProductDTO detail;
+    private PurchaseOrderProductDTO detail;
 
     private BigDecimal price;
 
@@ -46,11 +44,11 @@ public class OrderDTO {
         this.price = price;
     }
 
-    public OrderProductDTO getDetail() {
+    public PurchaseOrderProductDTO getDetail() {
         return detail;
     }
 
-    public void setDetail(OrderProductDTO detail) {
+    public void setDetail(PurchaseOrderProductDTO detail) {
         this.detail = detail;
     }
 
@@ -58,7 +56,7 @@ public class OrderDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderDTO orderDTO = (OrderDTO) o;
+        PurchaseOrderDTO orderDTO = (PurchaseOrderDTO) o;
         return Objects.equals(id, orderDTO.id) &&
                 Objects.equals(orderIndexCode, orderDTO.orderIndexCode) &&
                 Objects.equals(detail, orderDTO.detail) &&
@@ -72,7 +70,7 @@ public class OrderDTO {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("OrderDTO{");
+        final StringBuilder sb = new StringBuilder("PurchaseOrderDTO{");
         sb.append("id=").append(id);
         sb.append(", orderIndexCode='").append(orderIndexCode).append('\'');
         sb.append(", detail=").append(detail);

@@ -3,15 +3,15 @@
 <mapper namespace="com.ashzd.seckill.mapper.ProductMapper">
   <resultMap id="BaseResultMap" type="com.ashzd.seckill.entity.Product">
     <constructor>
-      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-      <arg column="last_version_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-      <arg column="store_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR"/>
-      <arg column="price" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
-      <arg column="quantity" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-      <arg column="created_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-      <arg column="updated_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <arg column="last_version_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <arg column="store_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <arg column="price" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
+        <arg column="quantity" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <arg column="created_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        <arg column="updated_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -80,39 +80,39 @@
     <if test="distinct">
       distinct
     </if>
-    <include refid="Base_Column_List"/>
+      <include refid="Base_Column_List"/>
     from product
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause"/>
+        <include refid="Example_Where_Clause"/>
     </if>
     <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
+      select
+      <include refid="Base_Column_List"/>
     from product
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete
-    from product
-    where id = #{id,jdbcType=INTEGER}
+      delete
+      from product
+      where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.ashzd.seckill.entity.ProductExample">
     delete from product
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause"/>
+        <include refid="Example_Where_Clause"/>
     </if>
   </delete>
   <insert id="insert" parameterType="com.ashzd.seckill.entity.Product">
-    insert into product (id, last_version_id, store_id,
-                         name, description, price,
-                         quantity, created_at, updated_at)
-    values (#{id,jdbcType=INTEGER}, #{lastVersionId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER},
-            #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
-            #{quantity,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+      insert into product (id, last_version_id, store_id,
+                           name, description, price,
+                           quantity, created_at, updated_at)
+      values (#{id,jdbcType=INTEGER}, #{lastVersionId,jdbcType=INTEGER}, #{storeId,jdbcType=INTEGER},
+              #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},
+              #{quantity,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.ashzd.seckill.entity.Product">
     insert into product
@@ -178,7 +178,7 @@
   <select id="countByExample" parameterType="com.ashzd.seckill.entity.ProductExample" resultType="java.lang.Long">
     select count(*) from product
     <if test="_parameter != null">
-      <include refid="Example_Where_Clause"/>
+        <include refid="Example_Where_Clause"/>
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
@@ -213,22 +213,22 @@
       </if>
     </set>
     <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause"/>
+        <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
     update product
     set id = #{record.id,jdbcType=INTEGER},
-    last_version_id = #{record.lastVersionId,jdbcType=INTEGER},
-    store_id = #{record.storeId,jdbcType=INTEGER},
-    name = #{record.name,jdbcType=VARCHAR},
-    description = #{record.description,jdbcType=VARCHAR},
-    price = #{record.price,jdbcType=DECIMAL},
-    quantity = #{record.quantity,jdbcType=INTEGER},
-    created_at = #{record.createdAt,jdbcType=TIMESTAMP},
-    updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+      last_version_id = #{record.lastVersionId,jdbcType=INTEGER},
+      store_id = #{record.storeId,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DECIMAL},
+      quantity = #{record.quantity,jdbcType=INTEGER},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause"/>
+        <include refid="Update_By_Example_Where_Clause"/>
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.ashzd.seckill.entity.Product">

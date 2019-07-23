@@ -12,6 +12,7 @@ import com.ashzd.seckill.util.StringUtil;
 import com.ashzd.seckill.util.converter.ProductConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.Date;
@@ -33,6 +34,7 @@ public class ProductServiceImpl implements ProductService {
     private StoreService storeService;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void add(ProductReq productReq, UserDTO userDTO) {
         // 参数校验
         Assert.notNull(productReq, "商品信息为空");
@@ -43,7 +45,7 @@ public class ProductServiceImpl implements ProductService {
         Assert.notNull(productReq.getStoreId(), "店铺编号为空");
         // 逻辑校验
         Assert.isTrue(storeService.isUserOwnStore(productReq.getStoreId(), userDTO.getUserId()), "店铺权限校验失败");
-        Assert.isTrue(this.isStoreHasSameProduct(productReq.getName(), productReq.getStoreId()), "店铺已存在同名商品");
+        Assert.isTrue(!this.isStoreHasSameProduct(productReq.getName(), productReq.getStoreId()), "店铺已存在同名商品");
         Product product = ProductConverter.toProduct(productReq);
         productMapper.insertSelective(product);
     }
@@ -56,10 +58,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void decrease(Integer productId) {
+    @Transactional(rollbackFor = Exception.class)
+    public void decrease(Integer productId, Integer quantity) {
         Product product = productMapper.selectByPrimaryKey(productId);
-        product.setQuantity(product.getQuantity() - 1);
+        product.setQuantity(product.getQuantity() - quantity);
         product.setUpdatedAt(new Date());
         productMapper.updateByPrimaryKey(product);
+    }
+
+    @Override
+    public boolean isStoreOwnProduct(Integer storeId, Integer productId) {
+        Product product = productMapper.selectByPrimaryKey(productId);
+        return product.getStoreId().equals(storeId);
     }
 }

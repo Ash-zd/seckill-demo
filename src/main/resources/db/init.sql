@@ -9,7 +9,7 @@ create table `order`
         unique (index_code)
 );
 
-alter table `order`
+alter table purchase_order
     add primary key (index_code);
 
 create table order_detail
