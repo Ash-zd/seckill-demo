@@ -26,11 +26,11 @@ spring:
     host: 127.0.0.1
     port: 6379
     password:
-    timeout: 200
+    timeout: 100
     pool:
-      max-active: 8
-      max-wait: -1
-      max-idle: 8
+      max-active: 1000
+      max-wait: 500
+      max-idle: 1000
 
 debug: true
 

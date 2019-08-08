@@ -1,14 +1,13 @@
 package com.ashzd.seckill.service.impl;
 
 import com.ashzd.seckill.dto.req.LoginReq;
+import com.ashzd.seckill.manager.redis.RedisManager;
 import com.ashzd.seckill.service.AuthService;
 import com.ashzd.seckill.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 /**
  * @file: AuthServiceImpl
@@ -21,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class AuthServiceImpl implements AuthService {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisManager redisManager;
     @Autowired
     private UserService userService;
 
@@ -29,20 +28,20 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String getTokenByUserId(Integer userId) {
         String token = UUID.randomUUID().toString().replace("-", "");
-        redisTemplate.opsForValue().set(token, userId, 2, TimeUnit.HOURS);
+        redisManager.set(token, userId);
         return token;
     }
 
     @Override
     public String getTokenByUsername(String username) {
         String token = UUID.randomUUID().toString().replace("-", "");
-        redisTemplate.opsForValue().set(token, username, 2, TimeUnit.HOURS);
+        redisManager.set(token, username);
         return token;
     }
 
     @Override
     public String getUsernameFromCacheByToken(String token) {
-        return (String) redisTemplate.opsForValue().get(token);
+        return redisManager.get(token, String.class);
     }
 
     @Override
