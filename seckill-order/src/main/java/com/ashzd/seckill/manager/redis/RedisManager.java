@@ -19,4 +19,8 @@ public interface RedisManager {
     boolean isExist(String key);
 
     boolean delete(String key);
+
+    boolean decrease(String key);
+
+    boolean increase(String key);
 }

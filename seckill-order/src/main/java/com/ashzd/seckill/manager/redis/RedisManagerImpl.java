@@ -2,11 +2,13 @@ package com.ashzd.seckill.manager.redis;
 
 import com.alibaba.fastjson.JSON;
 import com.ashzd.seckill.common.constant.RedisConstant;
+import com.ashzd.seckill.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -56,5 +58,23 @@ public class RedisManagerImpl implements RedisManager {
     @Override
     public boolean delete(String key) {
         return stringRedisTemplate.delete(key);
+    }
+
+    @Override
+    public boolean decrease(String key) {
+        String value = stringRedisTemplate.opsForValue().get(key);
+        if (value == null) {
+            return false;
+        }
+        return set(key, Long.parseLong(value) - 1);
+    }
+
+    @Override
+    public boolean increase(String key) {
+        String value = stringRedisTemplate.opsForValue().get(key);
+        if (value == null) {
+            return false;
+        }
+        return set(key, Long.parseLong(value) + 1);
     }
 }
