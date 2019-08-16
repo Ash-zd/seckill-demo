@@ -2,13 +2,11 @@ package com.ashzd.seckill.manager.redis;
 
 import com.alibaba.fastjson.JSON;
 import com.ashzd.seckill.common.constant.RedisConstant;
-import com.ashzd.seckill.util.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +29,29 @@ public class RedisManagerImpl implements RedisManager {
     public <T> T get(String key, Class<T> clazz) {
         String value = stringRedisTemplate.opsForValue().get(key);
         return JSON.parseObject(value, clazz);
+    }
+
+    @Override
+    public <T> T getAndSet(String key, String value, Class<T> clazz) {
+        return getAndSet(key, value, clazz, 2L, TimeUnit.HOURS);
+    }
+
+    @Override
+    public <T> T getAndSet(String key, String value, Class<T> clazz, long time, TimeUnit unit) {
+        String str = stringRedisTemplate.opsForValue().getAndSet(key, value);
+        stringRedisTemplate.expire(key, time, unit);
+        return JSON.parseObject(str, clazz);
+    }
+
+    @Override
+    public <T> T getAndRefreshExpireTime(String key, Class<T> clazz) {
+        refresh(key, RedisConstant.REDIS_DEFAULT_EXPIRE_TIME, RedisConstant.REDIS_DEFAULT_EXPIRE_TIME_UNIT);
+        return get(key, clazz);
+    }
+
+    @Override
+    public boolean refresh(String key, long time, TimeUnit unit) {
+        return stringRedisTemplate.expire(key, time, unit);
     }
 
     @Override

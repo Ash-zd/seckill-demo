@@ -49,7 +49,13 @@ public class AuthServiceImpl implements AuthService {
         String username = loginReq.getUsername();
         String password = loginReq.getPassword();
         if (userService.authUsernameAndPassword(username, password)) {
-            return this.getTokenByUsername(username);
+            if (redisManager.isExist(username)) {
+                return redisManager.getAndRefreshExpireTime(username, String.class);
+            } else {
+                String token = this.getTokenByUsername(username);
+                redisManager.set(username, token);
+                return token;
+            }
         } else {
             throw new RuntimeException("auth username and password failed", new Throwable());
         }

@@ -12,6 +12,14 @@ import java.util.concurrent.TimeUnit;
 public interface RedisManager {
     <T> T get(String key, Class<T> clazz);
 
+    <T> T getAndSet(String key, String value, Class<T> clazz);
+
+    <T> T getAndSet(String key, String value, Class<T> clazz, long time, TimeUnit unit);
+
+    <T> T getAndRefreshExpireTime(String key, Class<T> clazz);
+
+    boolean refresh(String key, long time, TimeUnit unit);
+
     <T> boolean set(String key, T value, long time, TimeUnit unit);
 
     <T> boolean set(String key, T value);
@@ -23,4 +31,5 @@ public interface RedisManager {
     boolean decrease(String key);
 
     boolean increase(String key);
+
 }

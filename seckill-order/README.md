@@ -2,7 +2,6 @@
 
 ## 技术栈
 
-`Spring Cloud`  
 `Spring Boot`  
 `Spring`  
 `Mybatis`  

@@ -8,6 +8,7 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 /**
@@ -23,20 +24,22 @@ public class CustomExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(CustomExceptionHandler.class);
 
     @ExceptionHandler(value = Exception.class)
-    public ErrorResponse commonExceptionHandler(Exception e) {
+    public ErrorResponse commonExceptionHandler(Exception e, HttpServletResponse response) {
         logger.debug("exception occurred! message is '{}'", e.getMessage(), e);
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setCode("400");
         errorResponse.setMessage("系统异常");
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         return errorResponse;
     }
 
     @ExceptionHandler(value = DataIntegrityViolationException.class)
-    public ErrorResponse sqlExceptionHandler(SQLException e) {
+    public ErrorResponse sqlExceptionHandler(SQLException e, HttpServletResponse response) {
         logger.debug("sql exception occurred! message is '{}'", e.getMessage(), e);
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setCode("400");
         errorResponse.setMessage("数据库执行错误");
+        response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         return errorResponse;
     }
 
