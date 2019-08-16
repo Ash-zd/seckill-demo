@@ -22,10 +22,18 @@ spring:
     password: 123456
   redis:
     database: 0
-    #    host: 192.168.123.100
-    host: 127.0.0.1
-    port: 6379
-    password:
+    #     host: 192.168.123.100
+    #    host: 127.0.0.1
+    #    port: 6379
+    #    password:
+    cluster:
+      nodes:
+        - 192.168.123.100:7000
+        - 192.168.123.100:7001
+        - 192.168.123.100:7002
+        - 192.168.123.100:7003
+        - 192.168.123.100:7004
+        - 192.168.123.100:7005
     lettuce:
       shutdown-timeout: 100
       pool:
@@ -33,6 +41,11 @@ spring:
         max-idle: 100
         max-wait: 30
         min-idle: 0
+  rabbitmq:
+    host: 192.168.123.100
+    port: 5672
+    username: test
+    password: test
 
 debug: true
 
