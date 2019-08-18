@@ -4,8 +4,12 @@ import com.ashzd.seckill.dto.PurchaseOrderDTO;
 import com.ashzd.seckill.dto.PurchaseOrderDetailDTO;
 import com.ashzd.seckill.dto.UserDTO;
 import com.ashzd.seckill.dto.req.PurchaseOrderReq;
+import com.ashzd.seckill.dto.req.SeckillReq;
 import com.ashzd.seckill.dto.req.page.OrderPageReq;
 import com.ashzd.seckill.entity.PurchaseOrder;
+import com.ashzd.seckill.manager.rabbitmq.MessageProducer;
+import com.ashzd.seckill.manager.rabbitmq.dto.MqMessage;
+import com.ashzd.seckill.manager.redis.RedisManager;
 import com.ashzd.seckill.mapper.PurchaseOrderMapper;
 import com.ashzd.seckill.service.ProductService;
 import com.ashzd.seckill.service.PurchaseOrderDetailService;
@@ -17,10 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @file: OrderServiceImpl
@@ -38,6 +39,10 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     private PurchaseOrderDetailService orderDetailService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private RedisManager redisManager;
+    @Autowired
+    private MessageProducer messageProducer;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -64,5 +69,24 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
     @Override
     public List<PurchaseOrderDTO> query(OrderPageReq orderPageReq) {
         return null;
+    }
+
+    @Override
+    public void seckill(SeckillReq seckillReq, UserDTO userDTO) {
+        Assert.notNull(seckillReq, "订单信息为空");
+        Assert.notNull(seckillReq.getStoreId(), "店铺编号为空");
+        Assert.notNull(seckillReq.getProductId(), "商品为空");
+        // redis 预减库存
+        Integer productId = seckillReq.getProductId();
+        boolean result = redisManager.decrease(Integer.toString(productId));
+        Assert.isTrue(result, "库存不足");
+        // 转发流量到消息队列
+        MqMessage message = new MqMessage();
+        message.setOperation("seckill");
+        Map<String, Object> data = new HashMap<>();
+        data.put("seckillReq", seckillReq);
+        data.put("userDTO", userDTO);
+        message.setData(data);
+        messageProducer.sendMessage(message);
     }
 }

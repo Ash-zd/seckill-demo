@@ -1,5 +1,7 @@
 package com.ashzd.seckill.manager.rabbitmq;
 
+import com.ashzd.seckill.manager.rabbitmq.dto.MqMessage;
+
 /**
  * @file: MessageProducer
  * @author: Ash
@@ -8,5 +10,7 @@ package com.ashzd.seckill.manager.rabbitmq;
  * @since:
  */
 public interface MessageProducer {
+    void sendMessage(String exchange, String routingKey, MqMessage message);
 
+    void sendMessage(MqMessage message);
 }

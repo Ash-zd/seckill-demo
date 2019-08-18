@@ -1,5 +1,7 @@
 package com.ashzd.seckill.manager.rabbitmq;
 
+import com.ashzd.seckill.manager.rabbitmq.dto.MqMessage;
+
 /**
  * @file: MessageConsumer
  * @author: Ash
@@ -8,4 +10,7 @@ package com.ashzd.seckill.manager.rabbitmq;
  * @since:
  */
 public interface MessageConsumer {
+    void receiveMessage(MqMessage message);
+
+    void process(MqMessage message);
 }

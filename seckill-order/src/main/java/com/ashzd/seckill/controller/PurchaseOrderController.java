@@ -3,6 +3,7 @@ package com.ashzd.seckill.controller;
 import com.ashzd.seckill.controller.common.BaseController;
 import com.ashzd.seckill.dto.common.ResponseData;
 import com.ashzd.seckill.dto.req.PurchaseOrderReq;
+import com.ashzd.seckill.dto.req.SeckillReq;
 import com.ashzd.seckill.service.PurchaseOrderService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,16 @@ public class PurchaseOrderController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @PreAuthorize("hasRole('USER')")
     public ResponseData addOrder(@RequestBody PurchaseOrderReq orderReq, HttpServletRequest request) {
+
         orderService.add(orderReq, getCurrentUserDTO(request));
+        return ResponseData.success();
+    }
+
+    @ApiOperation(value = "秒杀")
+    @RequestMapping(value = "/seckill", method = RequestMethod.POST)
+    @PreAuthorize("hasRole('USER')")
+    public ResponseData seckill(@RequestBody SeckillReq orderReq, HttpServletRequest request) {
+        orderService.seckill(orderReq, getCurrentUserDTO(request));
         return ResponseData.success();
     }
 }

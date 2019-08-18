@@ -30,7 +30,7 @@ public class RabbitMqConfig {
 
     @Bean
     public Binding topicBind() {
-        return BindingBuilder.bind(topicOrderQueue()).to(topicExchange()).with(MqConstant.ROUTING_KEY_TOPIC_ORDER_QUEUE);
+        return BindingBuilder.bind(topicOrderQueue()).to(topicExchange()).with(MqConstant.TOPIC_ORDER_QUEUE);
     }
 
 }
