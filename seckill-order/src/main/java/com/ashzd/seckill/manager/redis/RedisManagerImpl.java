@@ -5,6 +5,7 @@ import com.ashzd.seckill.common.constant.RedisConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -24,41 +25,48 @@ public class RedisManagerImpl implements RedisManager {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     @Override
-    public <T> T get(String key, Class<T> clazz) {
-        String value = stringRedisTemplate.opsForValue().get(key);
+    public <T> T get(String keyPrefix, String key, Class<T> clazz) {
+        String value = stringRedisTemplate.opsForValue().get(keyPrefix + key);
         return JSON.parseObject(value, clazz);
     }
 
     @Override
-    public <T> T getAndSet(String key, String value, Class<T> clazz) {
-        return getAndSet(key, value, clazz, 2L, TimeUnit.HOURS);
+    public <T> T getAndSet(String keyPrefix, String key, String value, Class<T> clazz) {
+        return getAndSet(keyPrefix, key, value, clazz, 2L, TimeUnit.HOURS);
     }
 
     @Override
-    public <T> T getAndSet(String key, String value, Class<T> clazz, long time, TimeUnit unit) {
+    public <T> T getAndSet(String keyPrefix, String key, String value, Class<T> clazz, long time, TimeUnit unit) {
         String str = stringRedisTemplate.opsForValue().getAndSet(key, value);
-        stringRedisTemplate.expire(key, time, unit);
+        stringRedisTemplate.expire(keyPrefix + key, time, unit);
         return JSON.parseObject(str, clazz);
     }
 
     @Override
-    public <T> T getAndRefreshExpireTime(String key, Class<T> clazz) {
-        refresh(key, RedisConstant.REDIS_DEFAULT_EXPIRE_TIME, RedisConstant.REDIS_DEFAULT_EXPIRE_TIME_UNIT);
-        return get(key, clazz);
+    public <T> T getAndRefreshExpireTime(String keyPrefix, String key, Class<T> clazz) {
+        refresh(keyPrefix, key, RedisConstant.REDIS_DEFAULT_EXPIRE_TIME, RedisConstant.REDIS_DEFAULT_EXPIRE_TIME_UNIT);
+        return get(keyPrefix, key, clazz);
     }
 
     @Override
-    public boolean refresh(String key, long time, TimeUnit unit) {
-        return stringRedisTemplate.expire(key, time, unit);
+    public boolean refresh(String keyPrefix, String key, long time, TimeUnit unit) {
+        return stringRedisTemplate.expire(keyPrefix + key, time, unit);
     }
 
     @Override
-    public <T> boolean set(String key, T value, long time, TimeUnit unit) {
+    public boolean refresh(String keyPrefix, String key) {
+        return refresh(keyPrefix, key, RedisConstant.REDIS_DEFAULT_EXPIRE_TIME, RedisConstant.REDIS_DEFAULT_EXPIRE_TIME_UNIT);
+    }
+
+    @Override
+    public <T> boolean set(String keyPrefix, String key, T value, long time, TimeUnit unit) {
         try {
             String json = JSON.toJSONString(value);
-            stringRedisTemplate.opsForValue().set(key, json, time, unit);
+            stringRedisTemplate.opsForValue().set(keyPrefix + key, json, time, unit);
         } catch (Exception e) {
             logger.debug("set value in redis failed", e);
             return false;
@@ -67,27 +75,37 @@ public class RedisManagerImpl implements RedisManager {
     }
 
     @Override
-    public <T> boolean set(String key, T value) {
-        return set(key, value, RedisConstant.REDIS_DEFAULT_EXPIRE_TIME, RedisConstant.REDIS_DEFAULT_EXPIRE_TIME_UNIT);
+    public <T> boolean set(String keyPrefix, String key, T value) {
+        return set(keyPrefix, key, value, RedisConstant.REDIS_DEFAULT_EXPIRE_TIME, RedisConstant.REDIS_DEFAULT_EXPIRE_TIME_UNIT);
     }
 
     @Override
-    public boolean isExist(String key) {
-        return stringRedisTemplate.hasKey(key);
+    public boolean isExist(String keyPrefix, String key) {
+        return stringRedisTemplate.hasKey(keyPrefix + key);
     }
 
     @Override
-    public boolean delete(String key) {
-        return stringRedisTemplate.delete(key);
+    public boolean isHashExist(String keyPrefix, String key, String hashKey) {
+        return redisTemplate.opsForHash().hasKey(keyPrefix + key, hashKey);
     }
 
     @Override
-    public boolean decrease(String key) {
-        return stringRedisTemplate.opsForValue().decrement(key) != null;
+    public boolean isSetExist(String keyPrefix, String key, Object member) {
+        return redisTemplate.opsForSet().isMember(keyPrefix + key, member);
     }
 
     @Override
-    public boolean increase(String key) {
-        return stringRedisTemplate.opsForValue().increment(key) != null;
+    public boolean delete(String keyPrefix, String key) {
+        return stringRedisTemplate.delete(keyPrefix + key);
+    }
+
+    @Override
+    public boolean decrease(String keyPrefix, String key) {
+        return stringRedisTemplate.opsForValue().decrement(keyPrefix + key) != null;
+    }
+
+    @Override
+    public boolean increase(String keyPrefix, String key) {
+        return stringRedisTemplate.opsForValue().increment(keyPrefix + key) != null;
     }
 }

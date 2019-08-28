@@ -1,5 +1,6 @@
 package com.ashzd.seckill.service.impl;
 
+import com.ashzd.seckill.common.constant.RedisConstant;
 import com.ashzd.seckill.dto.PurchaseOrderDTO;
 import com.ashzd.seckill.dto.PurchaseOrderDetailDTO;
 import com.ashzd.seckill.dto.UserDTO;
@@ -78,7 +79,7 @@ public class PurchaseOrderServiceImpl implements PurchaseOrderService {
         Assert.notNull(seckillReq.getProductId(), "商品为空");
         // redis 预减库存
         Integer productId = seckillReq.getProductId();
-        boolean result = redisManager.decrease(Integer.toString(productId));
+        boolean result = redisManager.decrease(RedisConstant.PRODUCT_QUANTITY_PREFIX, Integer.toString(productId));
         Assert.isTrue(result, "库存不足");
         // 转发流量到消息队列
         MqMessage message = new MqMessage();

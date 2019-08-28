@@ -10,26 +10,32 @@ import java.util.concurrent.TimeUnit;
  * @since:
  */
 public interface RedisManager {
-    <T> T get(String key, Class<T> clazz);
+    <T> T get(String keyPrefix, String key, Class<T> clazz);
 
-    <T> T getAndSet(String key, String value, Class<T> clazz);
+    <T> T getAndSet(String keyPrefix, String key, String value, Class<T> clazz);
 
-    <T> T getAndSet(String key, String value, Class<T> clazz, long time, TimeUnit unit);
+    <T> T getAndSet(String keyPrefix, String key, String value, Class<T> clazz, long time, TimeUnit unit);
 
-    <T> T getAndRefreshExpireTime(String key, Class<T> clazz);
+    <T> T getAndRefreshExpireTime(String keyPrefix, String key, Class<T> clazz);
 
-    boolean refresh(String key, long time, TimeUnit unit);
+    boolean refresh(String keyPrefix, String key, long time, TimeUnit unit);
 
-    <T> boolean set(String key, T value, long time, TimeUnit unit);
+    boolean refresh(String keyPrefix, String key);
 
-    <T> boolean set(String key, T value);
+    <T> boolean set(String keyPrefix, String key, T value, long time, TimeUnit unit);
 
-    boolean isExist(String key);
+    <T> boolean set(String keyPrefix, String key, T value);
 
-    boolean delete(String key);
+    boolean isExist(String keyPrefix, String key);
 
-    boolean decrease(String key);
+    boolean isHashExist(String keyPrefix, String key, String hashKey);
 
-    boolean increase(String key);
+    boolean isSetExist(String keyPrefix, String key, Object member);
+
+    boolean delete(String keyPrefix, String key);
+
+    boolean decrease(String keyPrefix, String key);
+
+    boolean increase(String keyPrefix, String key);
 
 }

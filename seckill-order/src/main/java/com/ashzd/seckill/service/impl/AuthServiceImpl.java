@@ -1,5 +1,6 @@
 package com.ashzd.seckill.service.impl;
 
+import com.ashzd.seckill.common.constant.RedisConstant;
 import com.ashzd.seckill.dto.req.LoginReq;
 import com.ashzd.seckill.manager.redis.RedisManager;
 import com.ashzd.seckill.service.AuthService;
@@ -28,20 +29,20 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String getTokenByUserId(Integer userId) {
         String token = UUID.randomUUID().toString().replace("-", "");
-        redisManager.set(token, userId);
+        redisManager.set(RedisConstant.USER_TOKEN_PREFIX, token, userId);
         return token;
     }
 
     @Override
     public String getTokenByUsername(String username) {
         String token = UUID.randomUUID().toString().replace("-", "");
-        redisManager.set(token, username);
+        redisManager.set(RedisConstant.USER_TOKEN_PREFIX, token, username);
         return token;
     }
 
     @Override
     public String getUsernameFromCacheByToken(String token) {
-        return redisManager.get(token, String.class);
+        return redisManager.get(RedisConstant.USER_TOKEN_PREFIX, token, String.class);
     }
 
     @Override
@@ -49,11 +50,13 @@ public class AuthServiceImpl implements AuthService {
         String username = loginReq.getUsername();
         String password = loginReq.getPassword();
         if (userService.authUsernameAndPassword(username, password)) {
-            if (redisManager.isExist(username)) {
-                return redisManager.getAndRefreshExpireTime(username, String.class);
+            if (redisManager.isExist(RedisConstant.LOGIN_USERNAME_PREFIX, username)) {
+                String token = redisManager.getAndRefreshExpireTime(RedisConstant.LOGIN_USERNAME_PREFIX, username, String.class);
+                redisManager.refresh(RedisConstant.USER_TOKEN_PREFIX, token);
+                return token;
             } else {
                 String token = this.getTokenByUsername(username);
-                redisManager.set(username, token);
+                redisManager.set(RedisConstant.LOGIN_USERNAME_PREFIX, username, token);
                 return token;
             }
         } else {
