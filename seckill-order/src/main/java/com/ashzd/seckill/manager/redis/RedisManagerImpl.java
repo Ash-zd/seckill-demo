@@ -83,19 +83,11 @@ public class RedisManagerImpl implements RedisManager {
 
     @Override
     public boolean decrease(String key) {
-        String value = stringRedisTemplate.opsForValue().get(key);
-        if (value == null) {
-            return false;
-        }
-        return set(key, Long.parseLong(value) - 1);
+        return stringRedisTemplate.opsForValue().decrement(key) != null;
     }
 
     @Override
     public boolean increase(String key) {
-        String value = stringRedisTemplate.opsForValue().get(key);
-        if (value == null) {
-            return false;
-        }
-        return set(key, Long.parseLong(value) + 1);
+        return stringRedisTemplate.opsForValue().increment(key) != null;
     }
 }
