@@ -1,5 +1,6 @@
 package com.ashzd.seckill.controller;
 
+import com.ashzd.seckill.common.annotation.ApiIdempotent;
 import com.ashzd.seckill.controller.common.BaseController;
 import com.ashzd.seckill.dto.common.ResponseData;
 import com.ashzd.seckill.dto.req.LoginReq;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @file: AuthController
@@ -25,6 +28,7 @@ public class AuthController extends BaseController {
     @Autowired
     private AuthService authService;
 
+    @ApiIdempotent(expire = 5L, unit = TimeUnit.SECONDS)
     @ApiOperation(value = "登录", notes = "登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseData login(@RequestBody LoginReq loginReq) {

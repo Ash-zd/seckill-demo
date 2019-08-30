@@ -1,5 +1,6 @@
 package com.ashzd.seckill.common.handler;
 
+import com.ashzd.seckill.common.exception.CustomException;
 import com.ashzd.seckill.dto.common.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 
 /**
  * @file: CustomExceptionHandler
@@ -33,8 +33,19 @@ public class CustomExceptionHandler {
         return errorResponse;
     }
 
+    @ExceptionHandler(value = CustomException.class)
+    public ErrorResponse customExceptionHandler(CustomException e, HttpServletResponse response) {
+        logger.debug("exception occurred! message is '{}'", e.getMessage(), e);
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setCode("400");
+        errorResponse.setMessage(e.getMessage());
+        response.setStatus(HttpServletResponse.SC_OK);
+        return errorResponse;
+    }
+
+
     @ExceptionHandler(value = DataIntegrityViolationException.class)
-    public ErrorResponse sqlExceptionHandler(SQLException e, HttpServletResponse response) {
+    public ErrorResponse sqlExceptionHandler(DataIntegrityViolationException e, HttpServletResponse response) {
         logger.debug("sql exception occurred! message is '{}'", e.getMessage(), e);
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setCode("400");

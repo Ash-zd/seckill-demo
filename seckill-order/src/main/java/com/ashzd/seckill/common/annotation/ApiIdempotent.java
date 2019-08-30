@@ -17,8 +17,8 @@ import java.util.concurrent.TimeUnit;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ApiIdempotent {
 
-    String username();
-
+    //    String username();
+//
     long expire();
 
     TimeUnit unit();
