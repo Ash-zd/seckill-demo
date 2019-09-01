@@ -17,20 +17,35 @@ spring:
       uri: mongodb://127.0.0.1:27017/seckill
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/seckill?useSSL=false&serverTimezone=UTC&characterEncoding=utf-8&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://192.168.123.100:3306/seckill?useSSL=false&serverTimezone=UTC&characterEncoding=utf-8&allowPublicKeyRetrieval=true
     username: root
     password: 123456
   redis:
     database: 0
-    #    host: 192.168.123.100
-    host: 127.0.0.1
-    port: 6379
-    password:
-    timeout: 200
-    pool:
-      max-active: 8
-      max-wait: -1
-      max-idle: 8
+    #     host: 127.0.0.1
+    #    host: 127.0.0.1
+    #    port: 6379
+    #    password:
+    cluster:
+      nodes:
+        - 127.0.0.1:7000
+        - 127.0.0.1:7001
+        - 127.0.0.1:7002
+        - 127.0.0.1:7003
+        - 127.0.0.1:7004
+        - 127.0.0.1:7005
+    lettuce:
+      shutdown-timeout: 100
+      pool:
+        max-active: 200
+        max-idle: 100
+        max-wait: 30
+        min-idle: 0
+  rabbitmq:
+    host: 192.168.123.100
+    port: 5672
+    username: test
+    password: test
 
 debug: false
 
