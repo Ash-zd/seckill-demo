@@ -5,6 +5,9 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainerFactoryConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -31,6 +34,15 @@ public class RabbitMqConfig {
     @Bean
     public Binding topicBind() {
         return BindingBuilder.bind(topicOrderQueue()).to(topicExchange()).with(MqConstant.TOPIC_ORDER_QUEUE);
+    }
+
+    @Bean("customRabbitConsumerFactory")
+    public SimpleRabbitListenerContainerFactory containerFactory(SimpleRabbitListenerContainerFactoryConfigurer containerFactoryConfigurer, ConnectionFactory connectionFactory) {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConcurrentConsumers(10);
+        factory.setMaxConcurrentConsumers(20);
+        containerFactoryConfigurer.configure(factory, connectionFactory);
+        return factory;
     }
 
 }

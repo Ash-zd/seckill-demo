@@ -26,7 +26,7 @@ import java.util.Map;
  * @since:
  */
 @Component
-@RabbitListener(queues = MqConstant.TOPIC_ORDER_QUEUE)
+@RabbitListener(queues = MqConstant.TOPIC_ORDER_QUEUE, containerFactory = "customRabbitConsumerFactory")
 public class MessageConsumerImpl implements MessageConsumer {
 
     private static final Logger logger = LoggerFactory.getLogger(MessageConsumerImpl.class);
