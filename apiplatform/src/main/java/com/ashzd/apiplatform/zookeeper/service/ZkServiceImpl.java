@@ -1,6 +1,5 @@
-package com.ashzd.apiplatform.service.impl;
+package com.ashzd.apiplatform.zookeeper.service;
 
-import com.ashzd.apiplatform.service.ZkService;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;

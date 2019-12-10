@@ -1,4 +1,4 @@
-package com.ashzd.apiplatform.config.zookeeper;
+package com.ashzd.apiplatform.zookeeper.config;
 
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;

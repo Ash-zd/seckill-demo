@@ -3,12 +3,13 @@ zookeeper:
   timeout: 10000
   test:
     path: /justfortest
-
+server:
+  port: 8081
 apicollection:
   ip: 192.168.123.186
   port: 8080
   service:
-    name: test
+    name: test 02
   swagger:
     packagePath: com.ashzd.apicollectionsdk.test
     docTitle: apicollectionsdk
@@ -18,4 +19,9 @@ apicollection:
     contactUrl: localhost:8080/swagger-ui.html
     contactEmail: ash_zd@qq.com
     docVersion: 1.0 Beta
+
+
+logging:
+  level:
+    org.springframework.boot.autoconfigure: error
 

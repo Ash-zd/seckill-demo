@@ -1,9 +1,8 @@
-package com.ashzd.apiplatform.service;
+package com.ashzd.apiplatform.zookeeper.service;
 
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.data.Stat;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -14,7 +13,6 @@ import java.util.List;
  * @description:
  * @since:
  */
-
 public interface ZkService {
 
     Stat exists(String path, boolean needWatch);
@@ -30,6 +28,5 @@ public interface ZkService {
     List<String> getChildren(String path) throws KeeperException, InterruptedException;
 
     String getData(String path, Watcher watcher);
-
 
 }

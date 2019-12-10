@@ -1,4 +1,4 @@
-package com.ashzd.apiplatform.service;
+package com.ashzd.apiplatform.zookeeper.watcher;
 
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * @description:
  * @since:
  */
-public interface ZkWatcherService extends Watcher {
+public interface ZkWatcher extends Watcher {
 
     @Override
     void process(WatchedEvent event);
