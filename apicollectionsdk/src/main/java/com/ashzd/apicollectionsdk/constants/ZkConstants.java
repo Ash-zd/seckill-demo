@@ -8,4 +8,7 @@ package com.ashzd.apicollectionsdk.constants;
  * @since:
  */
 public class ZkConstants {
+
+    public static String ZK_ROOT_PATH = "/apicollection";
+
 }

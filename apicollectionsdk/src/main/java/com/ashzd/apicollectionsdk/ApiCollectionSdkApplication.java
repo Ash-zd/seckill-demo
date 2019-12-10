@@ -1,5 +1,6 @@
 package com.ashzd.apicollectionsdk;
 
+import com.ashzd.apicollectionsdk.annotation.EnableApiCollection;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -11,6 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @description:
  * @since:
  */
+@EnableApiCollection
 @EnableConfigurationProperties
 @SpringBootApplication
 public class ApiCollectionSdkApplication {

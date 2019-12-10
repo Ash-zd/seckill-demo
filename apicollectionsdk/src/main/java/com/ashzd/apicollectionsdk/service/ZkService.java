@@ -1,4 +1,4 @@
-package com.ashzd.apicollectionsdk.service.impl;
+package com.ashzd.apicollectionsdk.service;
 
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;

@@ -1,5 +1,6 @@
 package com.ashzd.apicollectionsdk.service.impl;
 
+import com.ashzd.apicollectionsdk.service.ZkService;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
@@ -7,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import com.ashzd.apicollectionsdk.service.ZkService;
 
 import java.util.List;
 

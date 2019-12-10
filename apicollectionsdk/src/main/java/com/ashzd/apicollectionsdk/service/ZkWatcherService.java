@@ -1,5 +1,8 @@
 package com.ashzd.apicollectionsdk.service;
 
+import org.apache.zookeeper.WatchedEvent;
+import org.apache.zookeeper.Watcher;
+
 /**
  * @file: ZkWatcherService
  * @author: Ash
@@ -7,5 +10,9 @@ package com.ashzd.apicollectionsdk.service;
  * @description:
  * @since:
  */
-public interface ZkWatcherService {
+public interface ZkWatcherService extends Watcher {
+
+    @Override
+    void process(WatchedEvent event);
+
 }
