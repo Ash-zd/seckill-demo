@@ -27,7 +27,6 @@ import java.io.IOException;
 @RequestMapping("/v1/api/file")
 public class FileController extends BaseController {
 
-
     @Autowired
     private FileService fileService;
 

@@ -101,7 +101,7 @@ public class RedisManagerImpl implements RedisManager {
 
     @Override
     public boolean decrease(String keyPrefix, String key) {
-        return stringRedisTemplate.opsForValue().decrement(keyPrefix + key) != null;
+        return stringRedisTemplate.opsForValue().decrement(keyPrefix + key) >= 0;
     }
 
     @Override
