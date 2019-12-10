@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ashzd.apiplatform.mapper.ApiCollectionInfoMapper">
+  <resultMap id="BaseResultMap" type="com.ashzd.apiplatform.entity.ApiCollectionInfo">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="service_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="service_url" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="service_version" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="created_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="updated_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.ashzd.apiplatform.entity.ApiCollectionInfo">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="service_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="service_url" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="service_version" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="created_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="updated_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="service_json_info" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, service_name, service_url, service_version, created_at, updated_at
+  </sql>
+  <sql id="Blob_Column_List">
+    service_json_info
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.ashzd.apiplatform.entity.ApiCollectionInfoExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from api_collection_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.ashzd.apiplatform.entity.ApiCollectionInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from api_collection_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from api_collection_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from api_collection_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ashzd.apiplatform.entity.ApiCollectionInfoExample">
+    delete from api_collection_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ashzd.apiplatform.entity.ApiCollectionInfo">
+    insert into api_collection_info (id, service_name, service_url, 
+      service_version, created_at, updated_at, 
+      service_json_info)
+    values (#{id,jdbcType=INTEGER}, #{serviceName,jdbcType=VARCHAR}, #{serviceUrl,jdbcType=VARCHAR}, 
+      #{serviceVersion,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, 
+      #{serviceJsonInfo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ashzd.apiplatform.entity.ApiCollectionInfo">
+    insert into api_collection_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="serviceName != null">
+        service_name,
+      </if>
+      <if test="serviceUrl != null">
+        service_url,
+      </if>
+      <if test="serviceVersion != null">
+        service_version,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="serviceJsonInfo != null">
+        service_json_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="serviceName != null">
+        #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceUrl != null">
+        #{serviceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceVersion != null">
+        #{serviceVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceJsonInfo != null">
+        #{serviceJsonInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ashzd.apiplatform.entity.ApiCollectionInfoExample" resultType="java.lang.Long">
+    select count(*) from api_collection_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update api_collection_info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceName != null">
+        service_name = #{record.serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceUrl != null">
+        service_url = #{record.serviceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceVersion != null">
+        service_version = #{record.serviceVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createdAt != null">
+        created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatedAt != null">
+        updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.serviceJsonInfo != null">
+        service_json_info = #{record.serviceJsonInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update api_collection_info
+    set id = #{record.id,jdbcType=INTEGER},
+      service_name = #{record.serviceName,jdbcType=VARCHAR},
+      service_url = #{record.serviceUrl,jdbcType=VARCHAR},
+      service_version = #{record.serviceVersion,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP},
+      service_json_info = #{record.serviceJsonInfo,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update api_collection_info
+    set id = #{record.id,jdbcType=INTEGER},
+      service_name = #{record.serviceName,jdbcType=VARCHAR},
+      service_url = #{record.serviceUrl,jdbcType=VARCHAR},
+      service_version = #{record.serviceVersion,jdbcType=VARCHAR},
+      created_at = #{record.createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{record.updatedAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ashzd.apiplatform.entity.ApiCollectionInfo">
+    update api_collection_info
+    <set>
+      <if test="serviceName != null">
+        service_name = #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceUrl != null">
+        service_url = #{serviceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceVersion != null">
+        service_version = #{serviceVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceJsonInfo != null">
+        service_json_info = #{serviceJsonInfo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ashzd.apiplatform.entity.ApiCollectionInfo">
+    update api_collection_info
+    set service_name = #{serviceName,jdbcType=VARCHAR},
+      service_url = #{serviceUrl,jdbcType=VARCHAR},
+      service_version = #{serviceVersion,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      service_json_info = #{serviceJsonInfo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ashzd.apiplatform.entity.ApiCollectionInfo">
+    update api_collection_info
+    set service_name = #{serviceName,jdbcType=VARCHAR},
+      service_url = #{serviceUrl,jdbcType=VARCHAR},
+      service_version = #{serviceVersion,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
