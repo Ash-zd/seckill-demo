@@ -1,6 +1,6 @@
 zookeeper:
   url: 192.168.123.100:2181
-  timeout: 4000
+  timeout: 8000
   test:
     path: /justfortest
 spring:
@@ -10,10 +10,15 @@ spring:
     username: root
     password: 123456
 
+server:
+  port: 8080
+
 logging:
   config: classpath:logback-spring.xml
   level:
     org.springframework.web: debug
-    com.ashzd.seckill: debug
+    com.ashzd.apiplatform: debug
+    org.springframework.boot.autoconfigure: error
   file:
     path: logs/
+debug: true
